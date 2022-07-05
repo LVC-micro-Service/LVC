@@ -64,11 +64,7 @@ public class RegistroCasoLVC {
 
     List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
 
-    for (Sintoma item : sintomas) {
-      Sintoma sintoma = sintomaServico.findSintomaById(item.getId());
-      CasoSintoma casoSintoma = new CasoSintoma(caso, sintoma);
-      casoSintomaServico.inserir(casoSintoma);
-    }
+    salvarSintomas(sintomas, caso);
 
     Paciente paciente = salvarPaciente(dto);
 
@@ -79,6 +75,16 @@ public class RegistroCasoLVC {
     salvaGeoLocalizacao(endereco, dto);
 
     return caso;
+  }
+
+  private boolean salvarSintomas(List<Sintoma> sintomas, CasoLVC caso){
+
+    for (Sintoma item : sintomas) {
+      Sintoma sintoma = sintomaServico.findSintomaById(item.getId());
+      CasoSintoma casoSintoma = new CasoSintoma(caso, sintoma);
+      casoSintomaServico.inserir(casoSintoma);
+    }
+    return true;
   }
 
   private Paciente salvarPaciente(CasoLVCDTO dto) {

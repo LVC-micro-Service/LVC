@@ -20,13 +20,12 @@ public class RegistroCasoLVC {
     public void salvarCasoLVC(CasoLVCDTO dto) {
       CasoLVC caso = capturarCaso(dto);
 
+      servico.inserir(caso);
     }
 
     public CasoLVC capturarCaso(CasoLVCDTO dto) {
         CasoLVC caso = new CasoLVC();
     
-        
-
         return caso;
     }
 

@@ -51,6 +51,11 @@ public class Paciente {
     @OneToOne()
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "municipioCaso", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MunicipioCasoPaciente> municipioCasos = new ArrayList<MunicipioCasoPaciente>();
+    @OneToMany(
+        mappedBy = "caso",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List <MunicipioCaso> caso = new ArrayList <MunicipioCaso>();
+   
 }

@@ -21,6 +21,7 @@ public class Sintoma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
 
    @OneToMany(
@@ -29,5 +30,7 @@ public class Sintoma {
         orphanRemoval = true
     )
     private List <CasoSintoma> casos = new ArrayList <CasoSintoma>();
+
+    
 
 }

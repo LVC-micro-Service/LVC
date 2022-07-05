@@ -1,5 +1,5 @@
 package com.crudlvh.crudlvch.controller;
 
-public class CasoSintoma {
+public class CasoSintomaController {
 
 }

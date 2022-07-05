@@ -1,6 +1,5 @@
 package com.crudlvh.crudlvch.entities;
 
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;

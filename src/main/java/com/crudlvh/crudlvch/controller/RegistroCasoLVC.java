@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 import com.crudlvh.crudlvch.dto.CasoLVCDTO;
 import com.crudlvh.crudlvch.entities.CasoSintoma;
+import com.crudlvh.crudlvch.entities.Endereco;
+import com.crudlvh.crudlvch.entities.GeoLocalizacao;
+import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;
 import com.crudlvh.crudlvch.entities.CasoLVC;
 import com.crudlvh.crudlvch.service.CasoSintomaServico;
+import com.crudlvh.crudlvch.service.EnderecoServico;
+import com.crudlvh.crudlvch.service.GeoLocalizacaoServico;
+import com.crudlvh.crudlvch.service.PacienteServico;
 import com.crudlvh.crudlvch.service.RegistroServico;
 import com.crudlvh.crudlvch.service.SintomaServico;
 
@@ -35,6 +40,14 @@ public class RegistroCasoLVC {
   @Autowired
   private CasoSintomaServico casoSintomaServico;
 
+  @Autowired
+  private EnderecoServico enderecoServico;
+
+  @Autowired
+  private PacienteServico pacienteServico;
+
+  @Autowired
+  private GeoLocalizacaoServico geoLocalizacaoServico;
 
   @PostMapping("/inserir")
   public void salvarCasoLVC(@RequestBody CasoLVCDTO dto) {
@@ -44,8 +57,9 @@ public class RegistroCasoLVC {
 
   public CasoLVC capturarCaso(CasoLVCDTO dto) {
     CasoLVC caso = new CasoLVC(dto.getDataRegistro());
-    servico.inserir(caso);
     
+    servico.inserir(caso);
+
     List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
 
     for (Sintoma item : sintomas) {
@@ -53,7 +67,26 @@ public class RegistroCasoLVC {
       CasoSintoma casoSintoma = new CasoSintoma(caso, sintoma);
       casoSintomaServico.inserir(casoSintoma);
     }
-    
+
+    Paciente paciente = new Paciente(dto.getPaciente().getName(), dto.getPaciente().getHiv(),
+        dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
+        dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
+        dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
+    pacienteServico.inserir(paciente);
+
+    Endereco endereco = new Endereco(paciente, dto.getPaciente().getEndereco().getCodigoIBGE(),
+        dto.getPaciente().getEndereco().getUF(), dto.getPaciente().getEndereco().getMunicipio(),
+        dto.getPaciente().getEndereco().getCep(), dto.getPaciente().getEndereco().getZona(),
+        dto.getPaciente().getEndereco().getDistrito(), dto.getPaciente().getEndereco().getBairro(),
+        dto.getPaciente().getEndereco().getLogradouro(), dto.getPaciente().getEndereco().getComplemento(),
+        dto.getPaciente().getEndereco().getNumeroCasa());
+    enderecoServico.inserir(endereco);
+
+    GeoLocalizacao geoLocalizacao = new GeoLocalizacao(
+        dto.getPaciente().getEndereco().getGeoLocalizacao().getLatitude(),
+        dto.getPaciente().getEndereco().getGeoLocalizacao().getLongitude(), endereco);
+    geoLocalizacaoServico.inserir(geoLocalizacao);
+
     return caso;
   }
 

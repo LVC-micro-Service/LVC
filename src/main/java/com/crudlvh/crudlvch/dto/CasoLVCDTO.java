@@ -1,7 +1,7 @@
 package com.crudlvh.crudlvch.dto;
 
 
-import com.crudlvh.crudlvch.entities.CasoSintoma;
+import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,8 +24,14 @@ public class CasoLVCDTO {
         return dataRegistro;
     }
 
+    private Paciente paciente;
+    
     public List<Sintoma> getSintomas() {
         return sintomas;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
     }
 
 

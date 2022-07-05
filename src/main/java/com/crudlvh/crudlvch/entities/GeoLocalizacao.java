@@ -15,8 +15,28 @@ public class GeoLocalizacao {
     @Column
     private Long longitude;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @MapsId
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
+    public GeoLocalizacao(Long latitude, Long longitude, Endereco endereco) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.endereco = endereco;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    
 }

@@ -1,6 +1,5 @@
 package com.crudlvh.crudlvch.entities;
 
-import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +11,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CasoLVC {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dataRegistro;
+    private Date dataRegistro;
 
     @OneToMany(mappedBy = "sintoma", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CasoSintoma> sintomas = new ArrayList<CasoSintoma>();
@@ -35,7 +35,7 @@ public class CasoLVC {
         return id;
     }
 
-    public LocalDate getDataRegistro() {
+    public Date getDataRegistro() {
         return dataRegistro;
     }
 

@@ -10,5 +10,5 @@ import com.crudlvh.crudlvch.entities.Sintoma;
 @Repository
 public interface SintomaRepository extends JpaRepository<Sintoma, Long> {
 
-    Optional<Sintoma> findById(Long sintomaId);
+    Sintoma getById(Long sintomaId);
 }

@@ -9,20 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+// @Data
 @Table(name = "casoLVC")
 public class CasoLVC {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dataRegistro;
 
     @OneToMany(mappedBy = "sintoma", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -39,9 +41,12 @@ public class CasoLVC {
         return dataRegistro;
     }
 
-    public List<CasoSintoma> getSintomas() {
-        return sintomas;
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
+    public CasoLVC(Date dataRegistro){
+        this.dataRegistro = dataRegistro;
+    }
 
 }

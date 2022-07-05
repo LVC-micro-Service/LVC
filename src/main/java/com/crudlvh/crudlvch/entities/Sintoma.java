@@ -11,26 +11,33 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 @Entity
-@Data
-@Table(name="sintoma")
+@Table(name = "sintoma")
 public class Sintoma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
 
-   @OneToMany(
-        mappedBy = "caso",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
-    private List <CasoSintoma> casos = new ArrayList <CasoSintoma>();
+    @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CasoSintoma> casos = new ArrayList<CasoSintoma>();
 
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCasos(List<CasoSintoma> casos) {
+        this.casos = casos;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
 }

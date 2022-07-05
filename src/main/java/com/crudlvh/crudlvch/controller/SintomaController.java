@@ -16,7 +16,7 @@ public class SintomaController {
 @Autowired
 private SintomaServico service;
 
-    public Optional<Sintoma> findSintomaById(Long sintomaId) {
+    public Sintoma findSintomaById(Long sintomaId) {
         return service.findSintomaById(sintomaId);
     }
 

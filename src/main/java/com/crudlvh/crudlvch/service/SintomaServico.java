@@ -15,7 +15,7 @@ public class SintomaServico {
     @Autowired
     private SintomaRepository repository;
     
-    public Optional<Sintoma> findSintomaById(Long sintomaId) {
-        return repository.findById(sintomaId);
+    public Sintoma findSintomaById(Long sintomaId) {
+        return repository.getById(sintomaId);
     }
 }

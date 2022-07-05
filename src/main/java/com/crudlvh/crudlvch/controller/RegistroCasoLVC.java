@@ -3,6 +3,8 @@ package com.crudlvh.crudlvch.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.hibernate.loader.collection.PaddedBatchingCollectionInitializerBuilder;
+
 // import java.time.LocalDate;
 // import java.util.List;
 // import java.util.stream.Collector;
@@ -50,7 +52,7 @@ public class RegistroCasoLVC {
 
   @Autowired
   private GeoLocalizacaoServico geoLocalizacaoServico;
-  
+
   @Autowired
   private MunicipioCasoServico municipioCasoServico;
 
@@ -62,7 +64,7 @@ public class RegistroCasoLVC {
 
   public CasoLVC capturarCaso(CasoLVCDTO dto) {
     CasoLVC caso = new CasoLVC(dto.getDataRegistro());
-    
+
     servico.inserir(caso);
 
     List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
@@ -73,16 +75,33 @@ public class RegistroCasoLVC {
       casoSintomaServico.inserir(casoSintoma);
     }
 
-    
-    Paciente paciente = new Paciente(dto.getPaciente().getName(), dto.getPaciente().getHiv(),
-    dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
-    dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
-    dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
-    pacienteServico.inserir(paciente);
+    Paciente paciente = salvarPaciente(dto);
 
+    salvarMunicipioCaso(caso, paciente, dto);
+
+    Endereco endereco = salvarEndereco(paciente, dto);
+
+    salvaGeoLocalizacao(endereco, dto);
+
+    return caso;
+  }
+
+  private Paciente salvarPaciente(CasoLVCDTO dto) {
+    Paciente paciente = new Paciente(dto.getPaciente().getName(), dto.getPaciente().getHiv(),
+        dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
+        dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
+        dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
+    pacienteServico.inserir(paciente);
+    return paciente;
+  }
+
+  private boolean salvarMunicipioCaso(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {
     MunicipioCaso municipioCaso = new MunicipioCaso(caso, paciente, dto.getCodigoIbge());
     municipioCasoServico.inserir(municipioCaso);
+    return true;
+  }
 
+  private Endereco salvarEndereco(Paciente paciente, CasoLVCDTO dto) {
     Endereco endereco = new Endereco(paciente, dto.getPaciente().getEndereco().getCodigoIBGE(),
         dto.getPaciente().getEndereco().getUF(), dto.getPaciente().getEndereco().getMunicipio(),
         dto.getPaciente().getEndereco().getCep(), dto.getPaciente().getEndereco().getZona(),
@@ -91,12 +110,14 @@ public class RegistroCasoLVC {
         dto.getPaciente().getEndereco().getNumeroCasa());
     enderecoServico.inserir(endereco);
 
+    return endereco;
+  }
+
+  private void salvaGeoLocalizacao(Endereco endereco, CasoLVCDTO dto) {
     GeoLocalizacao geoLocalizacao = new GeoLocalizacao(
         dto.getPaciente().getEndereco().getGeoLocalizacao().getLatitude(),
         dto.getPaciente().getEndereco().getGeoLocalizacao().getLongitude(), endereco);
     geoLocalizacaoServico.inserir(geoLocalizacao);
-
-    return caso;
   }
 
 }

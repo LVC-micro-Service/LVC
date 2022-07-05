@@ -32,6 +32,13 @@ public class CasoSintoma {
         this.sintoma = sintoma;
         this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
     }
+    public CasoSintoma(CasoLVC caso, Sintoma sintoma, String outro) {
+        this.caso = caso;
+        this.sintoma = sintoma;
+        this.outro = outro;
+        this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
+    }
+
     public CasoSintoma() {
       
     }

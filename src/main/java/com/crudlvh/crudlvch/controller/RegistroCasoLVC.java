@@ -17,12 +17,14 @@ import com.crudlvh.crudlvch.dto.CasoLVCDTO;
 import com.crudlvh.crudlvch.entities.CasoSintoma;
 import com.crudlvh.crudlvch.entities.Endereco;
 import com.crudlvh.crudlvch.entities.GeoLocalizacao;
+import com.crudlvh.crudlvch.entities.MunicipioCaso;
 import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;
 import com.crudlvh.crudlvch.entities.CasoLVC;
 import com.crudlvh.crudlvch.service.CasoSintomaServico;
 import com.crudlvh.crudlvch.service.EnderecoServico;
 import com.crudlvh.crudlvch.service.GeoLocalizacaoServico;
+import com.crudlvh.crudlvch.service.MunicipioCasoServico;
 import com.crudlvh.crudlvch.service.PacienteServico;
 import com.crudlvh.crudlvch.service.RegistroServico;
 import com.crudlvh.crudlvch.service.SintomaServico;
@@ -48,6 +50,9 @@ public class RegistroCasoLVC {
 
   @Autowired
   private GeoLocalizacaoServico geoLocalizacaoServico;
+  
+  @Autowired
+  private MunicipioCasoServico municipioCasoServico;
 
   @PostMapping("/inserir")
   public void salvarCasoLVC(@RequestBody CasoLVCDTO dto) {
@@ -68,11 +73,15 @@ public class RegistroCasoLVC {
       casoSintomaServico.inserir(casoSintoma);
     }
 
+    
     Paciente paciente = new Paciente(dto.getPaciente().getName(), dto.getPaciente().getHiv(),
-        dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
-        dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
-        dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
+    dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
+    dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
+    dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
     pacienteServico.inserir(paciente);
+
+    MunicipioCaso municipioCaso = new MunicipioCaso(caso, paciente, dto.getCodigoIbge());
+    municipioCasoServico.inserir(municipioCaso);
 
     Endereco endereco = new Endereco(paciente, dto.getPaciente().getEndereco().getCodigoIBGE(),
         dto.getPaciente().getEndereco().getUF(), dto.getPaciente().getEndereco().getMunicipio(),

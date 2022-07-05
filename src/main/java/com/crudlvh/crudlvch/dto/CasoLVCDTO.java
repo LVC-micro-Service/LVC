@@ -17,6 +17,8 @@ public class CasoLVCDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dataRegistro;
 
+    private String codigoIbge;
+
     @NotBlank
     private List<Sintoma> sintomas;
 
@@ -32,6 +34,10 @@ public class CasoLVCDTO {
 
     public Paciente getPaciente() {
         return paciente;
+    }
+
+    public String getCodigoIbge() {
+        return codigoIbge;
     }
 
 

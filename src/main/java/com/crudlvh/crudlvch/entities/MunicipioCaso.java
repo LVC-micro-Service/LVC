@@ -1,5 +1,6 @@
 package com.crudlvh.crudlvch.entities;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,10 +22,14 @@ public class MunicipioCaso {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("pacienteId")
     private Paciente paciente;
+
+    @Column(name = "codigoIbge")
+    private String codigoIbge;
  
-    public MunicipioCaso(CasoLVC caso, Paciente paciente) {
+    public MunicipioCaso(CasoLVC caso, Paciente paciente, String codigoIbge) {
         this.caso = caso;
         this.paciente = paciente;
+        this.codigoIbge = codigoIbge;
         this.id = new MunicipioCasoId(caso.getId(), paciente.getId());
     }
 

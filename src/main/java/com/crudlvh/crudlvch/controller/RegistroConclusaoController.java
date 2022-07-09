@@ -31,11 +31,13 @@ public class RegistroConclusaoController {
 
         try {
             CasoLVC caso = casoServico.encontrarPorId(id);
-            if (caso != null) {
+            if (!caso.equals(null)) {
 
                 Conclusao conclusao = service.findByCasoLVCId(id);
 
-                if (conclusao.getId() != null) {
+
+
+                if (conclusao != null) {
                     throw new Exception("Conclusão já cadastrada");
                 }
 
@@ -47,15 +49,15 @@ public class RegistroConclusaoController {
                         dto.getConclusao().getCriterioConfirmacao(), evolucao, caso);
 
                 service.inserir(conclusion);
-                return new ResponseEntity<>(conclusion.toString(), HttpStatus.OK);
-            } else {
+                return new ResponseEntity<String>(conclusion.toString(), HttpStatus.OK);
 
+            } else {
                 throw new Exception();
             }
         }catch(NullPointerException error){
-            return new ResponseEntity<>("Caso não encontrado", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("Caso não encontrado", HttpStatus.BAD_REQUEST);
         } catch (Exception error) {
-            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(error.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }

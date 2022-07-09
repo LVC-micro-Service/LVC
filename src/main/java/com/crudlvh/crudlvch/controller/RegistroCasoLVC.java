@@ -23,15 +23,15 @@ import com.crudlvh.crudlvch.service.EnderecoServico;
 import com.crudlvh.crudlvch.service.GeoLocalizacaoServico;
 import com.crudlvh.crudlvch.service.MunicipioCasoServico;
 import com.crudlvh.crudlvch.service.PacienteServico;
-import com.crudlvh.crudlvch.service.RegistroServico;
+import com.crudlvh.crudlvch.service.CasoLVCServico;
 import com.crudlvh.crudlvch.service.SintomaServico;
 
 @RestController
-@RequestMapping(value = "/registro")
+@RequestMapping(value = "/caso")
 public class RegistroCasoLVC {
 
   @Autowired
-  private RegistroServico servico;
+  private CasoLVCServico servico;
 
   @Autowired
   private SintomaServico sintomaServico;
@@ -63,15 +63,10 @@ public class RegistroCasoLVC {
     servico.inserir(caso);
 
     List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
-
     salvarSintomas(sintomas, caso);
-
     Paciente paciente = salvarPaciente(dto);
-
     salvarMunicipioCaso(caso, paciente, dto);
-
     Endereco endereco = salvarEndereco(paciente, dto);
-
     salvaGeoLocalizacao(endereco, dto);
 
     return caso;

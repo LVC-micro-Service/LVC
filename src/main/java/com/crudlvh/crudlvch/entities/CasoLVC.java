@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-// @Data
 @Table(name = "casoLVC")
 public class CasoLVC {
 
@@ -32,6 +34,34 @@ public class CasoLVC {
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MunicipioCaso> pacientes = new ArrayList<MunicipioCaso>();
+
+    @OneToMany(mappedBy = "id", cascade   = CascadeType.ALL, orphanRemoval = true)
+    private List<Tratamento> tratamentos = new ArrayList<Tratamento>();
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "conclusao_id")
+    private Conclusao conclusao;
+    
+    public CasoLVC() {
+    }
+
+    public CasoLVC(Long id, Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
+            List<Tratamento> tratamentos) {
+        this.id = id;
+        this.dataRegistro = dataRegistro;
+        this.sintomas = sintomas;
+        this.pacientes = pacientes;
+        this.tratamentos = tratamentos;
+    }
+
+    public CasoLVC(Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
+            List<Tratamento> tratamentos) {
+        this.dataRegistro = dataRegistro;
+        this.sintomas = sintomas;
+        this.pacientes = pacientes;
+        this.tratamentos = tratamentos;
+    }
 
     public Long getId() {
         return id;

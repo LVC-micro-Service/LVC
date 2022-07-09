@@ -7,5 +7,7 @@ import com.crudlvh.crudlvch.entities.CasoLVC;
 
 @Repository
 public interface CasoLVCRepository extends JpaRepository<CasoLVC, Long> {
-    
+ 
+    CasoLVC getById(Long casoId);
+
 }

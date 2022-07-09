@@ -16,7 +16,6 @@ public class GeoLocalizacao {
     private Long longitude;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 

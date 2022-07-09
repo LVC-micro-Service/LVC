@@ -5,12 +5,11 @@ import javax.persistence.*;
 @Entity
 public class Endereco {
     
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;     
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
     

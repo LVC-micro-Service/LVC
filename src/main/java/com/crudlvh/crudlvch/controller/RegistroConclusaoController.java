@@ -30,28 +30,32 @@ public class RegistroConclusaoController {
     public ResponseEntity<String> salvarConclusao(@PathVariable Long id, @RequestBody ConclusaoDTO dto) {
 
         try {
-
             CasoLVC caso = casoServico.encontrarPorId(id);
+            if (caso != null) {
 
-            if (caso.getId() != null) {
+                Conclusao conclusao = service.findByCasoLVCId(id);
+
+                if (conclusao.getId() != null) {
+                    throw new Exception("Conclusão já cadastrada");
+                }
 
                 EvolucaoEnum evolucao = dto.getConclusao().getEvolucaoCaso();
 
                 Conclusao conclusion = new Conclusao(dto.getConclusao().isDiagnosticoImunologico(),
                         dto.getConclusao().isDiagnosticoParasitologico(),
                         dto.getConclusao().isDoencaRelacionadaAoTrabalho(), dto.getConclusao().getDataEncerramento(),
-                        dto.getConclusao().getCriterioConfirmacao(), dto.getConclusao().getEvolucaoCaso(), caso);
-
+                        dto.getConclusao().getCriterioConfirmacao(), evolucao, caso);
 
                 service.inserir(conclusion);
                 return new ResponseEntity<>(conclusion.toString(), HttpStatus.OK);
-
             } else {
-                return new ResponseEntity<>("Hello World!", HttpStatus.BAD_REQUEST);
-            }
 
-        } catch (Error error) {
-            return new ResponseEntity<>("Hello World!", HttpStatus.BAD_REQUEST);
+                throw new Exception();
+            }
+        }catch(NullPointerException error){
+            return new ResponseEntity<>("Caso não encontrado", HttpStatus.BAD_REQUEST);
+        } catch (Exception error) {
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }

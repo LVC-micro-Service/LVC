@@ -7,4 +7,7 @@ import com.crudlvh.crudlvch.entities.Conclusao;
 
 @Repository
 public interface ConclusaoRepository extends JpaRepository<Conclusao, Long> {
+
+    Conclusao findByCasoId(Long id);
+
 }

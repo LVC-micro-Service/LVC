@@ -1,4 +1,5 @@
 package com.crudlvh.crudlvch.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,10 @@ public class ConclusaoServico {
     public void inserir(Conclusao conclusao) {
         repository.save(conclusao);
     }
+
+    public Conclusao findByCasoLVCId(Long id) {
+        return repository.findByCasoId(id);
+    }
+
 
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 @Entity
 public class Conclusao {
@@ -28,8 +28,7 @@ public class Conclusao {
     private String criterioConfirmacao;
     private EvolucaoEnum evolucaoCaso;
 
-    @OneToOne(mappedBy = "caso", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CasoLVC caso;
 
     public Conclusao(boolean diagnosticoImunologico, boolean diagnosticoParasitologico,
@@ -44,6 +43,8 @@ public class Conclusao {
         this.caso = caso;
     }
 
+    public Conclusao(){}
+    
     public Long getId() {
         return id;
     }
@@ -83,9 +84,5 @@ public class Conclusao {
                 + ", diagnosticoParasitologico=" + diagnosticoParasitologico + ", doencaRelacionadaAoTrabalho="
                 + doencaRelacionadaAoTrabalho + ", evolucaoCaso=" + evolucaoCaso + ", id=" + id + "]";
     }
-
-
-
-    
 
 }

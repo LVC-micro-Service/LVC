@@ -19,6 +19,12 @@ import java.util.List;
 @Table(name = "casoLVC")
 public class CasoLVC {
 
+    @Override
+    public String toString() {
+        return "CasoLVC [dataRegistro=" + dataRegistro + ", pacientes=" + pacientes + ", sintomas=" + sintomas
+                + ", tratamentos=" + tratamentos + "]";
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,5 +1,6 @@
 package com.crudlvh.crudlvch.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.crudlvh.crudlvch.dto.ConclusaoDTO;
 import com.crudlvh.crudlvch.entities.CasoLVC;
 import com.crudlvh.crudlvch.entities.Conclusao;
@@ -61,5 +61,7 @@ public class RegistroConclusaoController {
         }
 
     }
+
+
 
 }

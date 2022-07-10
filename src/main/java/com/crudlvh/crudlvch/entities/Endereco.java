@@ -4,44 +4,44 @@ import javax.persistence.*;
 
 @Entity
 public class Endereco {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;     
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
-    
+
     @Column
     private Long codigoIBGE;
 
-    @Column 
+    @Column
     private String uf;
 
-    @Column 
+    @Column
     private String municipio;
 
-    @Column 
+    @Column
     private Long cep;
 
-    @Column 
+    @Column
     private String zona;
 
-    @Column 
+    @Column
     private String distrito;
 
-    @Column 
+    @Column
     private String bairro;
 
-    @Column 
+    @Column
     private String logradouro;
 
-    @Column 
+    @Column
     private String complemento;
 
-    @Column 
-    private int numeroCasa; 
+    @Column
+    private int numeroCasa;
 
     @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -60,6 +60,17 @@ public class Endereco {
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.numeroCasa = numeroCasa;
+    }
+
+    @Override
+    public String toString() {
+        return "Endereco: {bairro:" + bairro + ", cep:" + cep + ", codigoIBGE:" + codigoIBGE + ", complemento:"
+                + complemento + ", distrito:" + distrito + ", id:" + id
+                + ", logradouro:" + logradouro + ", municipio:" + municipio + ", numeroCasa:" + numeroCasa
+                + ", uf:" + uf + ", zona:" + zona + "}";
+    }
+
+    public Endereco() {
     }
 
     public Long getId() {
@@ -166,5 +177,4 @@ public class Endereco {
         this.geoLocalizacao = geoLocalizacao;
     }
 
-    
 }

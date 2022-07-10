@@ -64,6 +64,9 @@ public class Paciente {
         this.sexo = sexo;
     }
 
+    public Paciente() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -166,6 +169,13 @@ public class Paciente {
 
     public void setCaso(List<MunicipioCaso> caso) {
         this.caso = caso;
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente: {id:" + id + ", name:" + name + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
+                + nomeMae + ", peso:" + peso + ", gestante:" + gestante + ", numCartaoSus:" + numCartaoSus
+                + ", etniaEnum:" + etniaEnum + ", escolaridade:" + escolaridade + ", sexo:" + sexo + "}";
     }
 
 }

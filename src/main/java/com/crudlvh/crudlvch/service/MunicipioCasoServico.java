@@ -16,4 +16,8 @@ public class MunicipioCasoServico {
         repository.save(municipioCaso);
     }
 
+    public MunicipioCaso findMunicipioByCasoId(Long id){
+        return repository.findByCasoId(id);
+    }
+
 }

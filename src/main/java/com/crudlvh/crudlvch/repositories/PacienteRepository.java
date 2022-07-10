@@ -6,4 +6,6 @@ import com.crudlvh.crudlvch.entities.Paciente;
 
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     
+        public Paciente getById(Long id);
+
 }

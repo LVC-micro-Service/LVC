@@ -15,4 +15,9 @@ public class PacienteServico {
     public void inserir(Paciente paciente) {
         repository.save(paciente);
     }
+
+    public Paciente findPacienteById(Long id) {
+        return repository.getById(id);
+    }
+    
 }

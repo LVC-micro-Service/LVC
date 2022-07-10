@@ -25,6 +25,13 @@ public class GeoLocalizacao {
         this.endereco = endereco;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public GeoLocalizacao() {
+    }
+
     public Long getLatitude() {
         return latitude;
     }
@@ -35,6 +42,11 @@ public class GeoLocalizacao {
 
     public Endereco getEndereco() {
         return endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "GeoLocalizacao: {latitude:" + latitude + ", longitude:" + longitude + "}";
     }
 
     

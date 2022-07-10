@@ -1,5 +1,7 @@
 package com.crudlvh.crudlvch.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,8 @@ public class CasoSintomaServico {
         repository.save(casoSintoma);
     }
     
+    public List<CasoSintoma> findSintomas(Long id){
+        return repository.findByCasoId(id);
+    }
+
 }

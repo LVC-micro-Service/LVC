@@ -9,4 +9,6 @@ import com.crudlvh.crudlvch.entities.MunicipioCasoId;
 @Repository
 public interface MunicipioCasoRepository  extends JpaRepository<MunicipioCaso, MunicipioCasoId> {
     
+    public MunicipioCaso findByCasoId(Long id);
+
 }

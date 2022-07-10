@@ -23,6 +23,22 @@ public class MunicipioCaso {
     @MapsId("pacienteId")
     private Paciente paciente;
 
+    public CasoLVC getCaso() {
+        return caso;
+    }
+
+    public void setCaso(CasoLVC caso) {
+        this.caso = caso;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
     @Column(name = "codigoIbge")
     private String codigoIbge;
  

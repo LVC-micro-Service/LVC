@@ -1,5 +1,7 @@
 package com.crudlvh.crudlvch.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,9 @@ public class CasoLVCServico {
 
     public void inserir(CasoLVC caso) {
         repository.save(caso);
+    }
+
+    public List<CasoLVC> listarCasos(){
+        return repository.findAll();
     }
 }

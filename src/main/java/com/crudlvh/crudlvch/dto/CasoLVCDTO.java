@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 
 public class CasoLVCDTO {
 
+    private Long id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dataRegistro;
@@ -21,12 +22,12 @@ public class CasoLVCDTO {
 
     @NotBlank
     private List<Sintoma> sintomas;
+    
+    private Paciente paciente;
 
     public Date getDataRegistro() {
         return dataRegistro;
     }
-
-    private Paciente paciente;
     
     public List<Sintoma> getSintomas() {
         return sintomas;
@@ -40,6 +41,8 @@ public class CasoLVCDTO {
         return codigoIbge;
     }
 
-
+    public Long getId() {
+        return id;
+    }
    
 }

@@ -14,7 +14,7 @@ public class CasoProducer {
     @Value("${crud.rabbitmq.exchange}")
     String exchange;
 
-    @Value("crud.rabbitmq.routingKeyCaso")
+    @Value("routingKeyCaso")
     String routingKey;
 
     private RabbitTemplate rabbitTemplate;

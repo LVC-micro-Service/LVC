@@ -14,6 +14,7 @@ import com.crudlvh.crudlvch.repositories.CasoSintomaRepository;
 @Service
 public class CasoLVCServico {
 
+    @Autowired
     private CasoProducer casoProducer;
 
     @Autowired
@@ -24,8 +25,6 @@ public class CasoLVCServico {
 
     public void inserirCasoSintoma(CasoSintoma casoSintoma) {
         casoSintomaRepository.save(casoSintoma);
-        
-        
     }
     
     public CasoLVC encontrarPorId(Long id) {

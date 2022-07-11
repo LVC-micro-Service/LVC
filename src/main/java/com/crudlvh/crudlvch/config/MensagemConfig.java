@@ -10,7 +10,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 @Configuration
 public class MensagemConfig {
     
-    @Value("${crud.rabbit.mq.exchange}")
+    @Value("${crud.rabbitmq.exchange}")
     String exchange;
 
     @Bean

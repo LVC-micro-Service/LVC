@@ -59,7 +59,7 @@ public class RegistroCasoLVC {
   }
 
   public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
-    CasoLVC caso = new CasoLVC(dto.getDataRegistro());
+    CasoLVC caso = new CasoLVC(dto.getId(), dto.getDataRegistro());
 
     try{
       servico.inserir(caso);

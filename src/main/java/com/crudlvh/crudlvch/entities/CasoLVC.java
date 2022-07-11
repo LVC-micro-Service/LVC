@@ -40,6 +40,11 @@ public class CasoLVC {
     public CasoLVC() {
     }
 
+    public CasoLVC(Long id, Date dataRegistro) {
+        this.id = id;
+        this.dataRegistro = dataRegistro;
+    }
+
     public CasoLVC(Long id, Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
     List<Tratamento> tratamentos) {
         this.id = id;

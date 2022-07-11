@@ -19,12 +19,7 @@ import java.util.List;
 @Table(name = "casoLVC")
 public class CasoLVC {
 
-    @Override
-    public String toString() {
-        return "CasoLVC [dataRegistro=" + dataRegistro + ", pacientes=" + pacientes + ", sintomas=" + sintomas
-                + ", tratamentos=" + tratamentos + "]";
-    }
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,7 +41,7 @@ public class CasoLVC {
     }
 
     public CasoLVC(Long id, Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
-            List<Tratamento> tratamentos) {
+    List<Tratamento> tratamentos) {
         this.id = id;
         this.dataRegistro = dataRegistro;
         this.sintomas = sintomas;
@@ -55,17 +50,17 @@ public class CasoLVC {
     }
 
     public CasoLVC(Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
-            List<Tratamento> tratamentos) {
+    List<Tratamento> tratamentos) {
         this.dataRegistro = dataRegistro;
         this.sintomas = sintomas;
         this.pacientes = pacientes;
         this.tratamentos = tratamentos;
     }
-
+    
     public Long getId() {
         return id;
     }
-
+    
     public Date getDataRegistro() {
         return dataRegistro;
     }
@@ -73,9 +68,16 @@ public class CasoLVC {
     public void setDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
-
+    
     public CasoLVC(Date dataRegistro){
         this.dataRegistro = dataRegistro;
     }
-
+    
+    @Override
+    public String toString() {
+        return "CasoLVC [dataRegistro=" + dataRegistro + ", pacientes=" + pacientes + ", sintomas=" + sintomas
+                + ", tratamentos=" + tratamentos + "]";
+    }
+    
+    
 }

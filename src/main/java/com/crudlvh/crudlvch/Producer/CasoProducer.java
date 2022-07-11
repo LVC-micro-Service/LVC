@@ -1,15 +1,12 @@
 package com.crudlvh.crudlvch.Producer;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.messaging.handler.annotation.Payload;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.crudlvh.crudlvch.entities.CasoLVC;
-import com.crudlvh.crudlvch.repositories.CasoLVCRepository;
 
 @Component
 class CasoProducer {

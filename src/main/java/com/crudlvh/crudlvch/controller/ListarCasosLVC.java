@@ -22,9 +22,7 @@ import com.crudlvh.crudlvch.service.CasoLVCServico;
 import com.crudlvh.crudlvch.service.CasoSintomaServico;
 import com.crudlvh.crudlvch.service.MunicipioCasoServico;
 import com.crudlvh.crudlvch.service.PacienteServico;
-import com.crudlvh.crudlvch.service.SintomaServico;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 @RestController
@@ -36,9 +34,6 @@ public class ListarCasosLVC {
 
     @Autowired
     private CasoSintomaServico casoSintomaServico;
-
-    @Autowired
-    private SintomaServico sintomaServico;
 
     @Autowired
     private PacienteServico pacienteServico;

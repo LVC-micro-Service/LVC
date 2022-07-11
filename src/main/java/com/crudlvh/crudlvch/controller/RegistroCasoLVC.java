@@ -3,6 +3,8 @@ package com.crudlvh.crudlvch.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,17 +60,15 @@ public class RegistroCasoLVC {
     capturarCaso(dto);
   }
 
+  @Transactional(rollbackOn = Exception.class)
   public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
     CasoLVC caso = new CasoLVC(dto.getId(), dto.getDataRegistro());
-
-    try{
+    System.out.println(dto.getCodigoIbge() + "b");
+    try {
       servico.inserir(caso);
-
-      if(dto.getCodigoIbge() == null){
-        throw new Exception("É necessário informar o código ibge do município de contaminação");
-      }else{
-
-        
+      boolean codigo = dto.getCodigoIbge() == null;
+      if (!codigo) {
+        System.out.println(dto.getCodigoIbge() + "a");
         List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
         salvarSintomas(sintomas, caso);
         Paciente paciente = salvarPaciente(dto);
@@ -76,9 +76,15 @@ public class RegistroCasoLVC {
         Endereco endereco = salvarEndereco(paciente, dto);
         salvaGeoLocalizacao(endereco, dto);
         return new ResponseEntity<>("Caso registrado com sucesso", HttpStatus.OK);
+      } else if(codigo) {
+        throw new NullPointerException("É necessário informar o código ibge do município de contaminação");
+      }else{
+        throw new Exception();
       }
-    }catch(Exception e){
-      return new ResponseEntity<String>(e.getMessage(),  HttpStatus.BAD_REQUEST);
+    } catch (NullPointerException e) {
+      return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }catch (Exception e) {
+      return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
   }
 

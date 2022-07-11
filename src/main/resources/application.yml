@@ -2,3 +2,16 @@ server:
   port: 8080
   servlet:
     context-path: /crudService
+
+  rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+
+crud:
+  rabbitmq:
+    exchange: crud.exchange
+    routingkeyCaso: crud.caso.routingkey
+    authExchange: auth.exchange
+    signupQueue: auth.crud.usuario

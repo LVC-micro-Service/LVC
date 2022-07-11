@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.crudlvh.crudlvch.entities.CasoLVC;
 import com.crudlvh.crudlvch.repositories.CasoLVCRepository;
@@ -19,10 +20,7 @@ class CasoProducer {
     @Value("crud.rabbitmq.routingKeyCaso")
     String routingKey;
 
-    private RabbitTemplate RabbitTemplate;
-
-
-    private CasoLVCRepository repository;
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     public CasoProducer(RabbitTemplate rabbitTemplate) {

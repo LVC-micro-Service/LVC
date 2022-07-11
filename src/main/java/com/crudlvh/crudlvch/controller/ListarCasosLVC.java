@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crudlvh.crudlvch.dto.CasoCompleto;
 import com.crudlvh.crudlvch.entities.CasoLVC;
 import com.crudlvh.crudlvch.entities.CasoSintoma;
-import com.crudlvh.crudlvch.entities.Endereco;
-import com.crudlvh.crudlvch.entities.GeoLocalizacao;
 import com.crudlvh.crudlvch.entities.MunicipioCaso;
 import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;

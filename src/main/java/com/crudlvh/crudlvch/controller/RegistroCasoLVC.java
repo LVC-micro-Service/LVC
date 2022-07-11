@@ -3,8 +3,9 @@ package com.crudlvh.crudlvch.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,22 +58,31 @@ public class RegistroCasoLVC {
     capturarCaso(dto);
   }
 
-  public CasoLVC capturarCaso(CasoLVCDTO dto) {
+  public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
     CasoLVC caso = new CasoLVC(dto.getDataRegistro());
 
-    servico.inserir(caso);
+    try{
+      servico.inserir(caso);
 
-    List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
-    salvarSintomas(sintomas, caso);
-    Paciente paciente = salvarPaciente(dto);
-    salvarMunicipioCaso(caso, paciente, dto);
-    Endereco endereco = salvarEndereco(paciente, dto);
-    salvaGeoLocalizacao(endereco, dto);
+      if(dto.getCodigoIbge() == null){
+        throw new Exception("É necessário informar o código ibge do município de contaminação");
+      }else{
 
-    return caso;
+        
+        List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
+        salvarSintomas(sintomas, caso);
+        Paciente paciente = salvarPaciente(dto);
+        salvarMunicipioCaso(caso, paciente, dto);
+        Endereco endereco = salvarEndereco(paciente, dto);
+        salvaGeoLocalizacao(endereco, dto);
+        return new ResponseEntity<>("Caso registrado com sucesso", HttpStatus.OK);
+      }
+    }catch(Exception e){
+      return new ResponseEntity<String>(e.getMessage(),  HttpStatus.BAD_REQUEST);
+    }
   }
 
-  private boolean salvarSintomas(List<Sintoma> sintomas, CasoLVC caso){
+  private boolean salvarSintomas(List<Sintoma> sintomas, CasoLVC caso) {
 
     for (Sintoma item : sintomas) {
       Sintoma sintoma = sintomaServico.findSintomaById(item.getId());

@@ -1,4 +1,4 @@
-package com.crudlvh.crudlvch.Producer;
+package com.crudlvh.crudlvch.producer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.crudlvh.crudlvch.entities.CasoLVC;
 
 @Component
-class CasoProducer {
+public class CasoProducer {
 
     @Value("${crud.rabbitmq.exchange}")
     String exchange;

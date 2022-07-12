@@ -82,12 +82,29 @@ public class CasoCompleto {
 
     @Override
     public String toString() {
-        return "{CasoCompleto: {" + "\n" + endereco.toString() + ",\n"
+        return "{CasoCompleto: { id:" + caso.getId() + "," + "\n" + endereco.toString() + ",\n"
                 + paciente.toString() + ",\n"
-                + geoLocalizacao.toString() + ",\nSintomas:" + sintomas.toString() + "}}";
+                + geoLocalizacao.toString() + ",\nSintomas:" + sintomas.toString() + ", Tratamento:" + tratamentoList()
+                + ", Conclusao:" + conclusaoString() + "}}";
     }
 
     private Endereco endereco;
+
+    public String tratamentoList() {
+        if (tratamento == null) {
+            return "\"\"";
+        } else {
+            return tratamento.toString();
+        }
+    }
+
+    public String conclusaoString() {
+        if (conclusao == null) {
+            return "\"\"";
+        } else {
+            return conclusao.toString();
+        }
+    }
 
     public CasoCompleto(CasoLVC caso, List<Sintoma> sintomas, Paciente paciente, Endereco endereco,
             GeoLocalizacao geoLocalizacao) {

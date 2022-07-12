@@ -42,8 +42,9 @@ public class Conclusao {
         this.caso = caso;
     }
 
-    public Conclusao(){}
-    
+    public Conclusao() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -78,10 +79,10 @@ public class Conclusao {
 
     @Override
     public String toString() {
-        return "Conclusao [caso=" + caso + ", criterioConfirmacao=" + criterioConfirmacao + ", dataEncerramento="
-                + dataEncerramento + ", diagnosticoImunologico=" + diagnosticoImunologico
-                + ", diagnosticoParasitologico=" + diagnosticoParasitologico + ", doencaRelacionadaAoTrabalho="
-                + doencaRelacionadaAoTrabalho + ", evolucaoCaso=" + evolucaoCaso + ", id=" + id + "]";
+        return "{criterioConfirmacao:" + criterioConfirmacao + ", dataEncerramento:"
+                + dataEncerramento + ", diagnosticoImunologico:" + diagnosticoImunologico
+                + ", diagnosticoParasitologico:" + diagnosticoParasitologico + ", doencaRelacionadaAoTrabalho:"
+                + doencaRelacionadaAoTrabalho + ", evolucaoCaso:" + evolucaoCaso + ", id:" + id + "}";
     }
 
 }

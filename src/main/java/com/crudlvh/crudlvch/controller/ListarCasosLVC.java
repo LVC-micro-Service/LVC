@@ -16,10 +16,12 @@ import com.crudlvh.crudlvch.entities.CasoSintoma;
 import com.crudlvh.crudlvch.entities.MunicipioCaso;
 import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;
+import com.crudlvh.crudlvch.entities.Tratamento;
 import com.crudlvh.crudlvch.service.CasoLVCServico;
 import com.crudlvh.crudlvch.service.CasoSintomaServico;
 import com.crudlvh.crudlvch.service.MunicipioCasoServico;
 import com.crudlvh.crudlvch.service.PacienteServico;
+import com.crudlvh.crudlvch.service.TratamentoServico;
 
 import org.json.JSONObject;
 
@@ -39,6 +41,9 @@ public class ListarCasosLVC {
     @Autowired
     private MunicipioCasoServico municipioServico;
 
+    @Autowired
+    private TratamentoServico tratamentoServico;
+
     @GetMapping(value = "/listar")
     public ResponseEntity<String> listarCasos() {
 
@@ -54,8 +59,6 @@ public class ListarCasosLVC {
                     sintomas.add(casoSintoma.getSintoma());
                 }
 
-                System.out.println(casoLVC.getId());
-
                 MunicipioCaso municipioCaso = municipioServico.findMunicipioByCasoId(casoLVC.getId());
 
                 Paciente paciente = pacienteServico.findPacienteById(municipioCaso.getPaciente().getId());
@@ -63,13 +66,21 @@ public class ListarCasosLVC {
                 CasoCompleto casoCompleto = new CasoCompleto(casoLVC, sintomas, paciente, paciente.getEndereco(),
                         paciente.getEndereco().getGeoLocalizacao());
 
+                Tratamento tratamento = tratamentoServico.findByCasoId(casoLVC.getId());
+
+                casoCompleto.setTratamento(tratamento);
+
+                // System.out.println(casoCompleto.toString());
+
                 JSONObject jo = new JSONObject(casoCompleto.toString());
+
+                
                 json.add(jo);
 
             }
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getCause());
         }
         return new ResponseEntity<String>(json.toString(), HttpStatus.OK);
     }

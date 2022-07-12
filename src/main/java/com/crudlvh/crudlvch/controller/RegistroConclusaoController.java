@@ -36,6 +36,7 @@ public class RegistroConclusaoController {
 
                 Conclusao conclusao = service.findByCasoLVCId(id);
 
+                System.out.println(caso.getId());
 
 
                 if (conclusao != null) {
@@ -48,6 +49,7 @@ public class RegistroConclusaoController {
                         dto.getConclusao().isDiagnosticoParasitologico(),
                         dto.getConclusao().isDoencaRelacionadaAoTrabalho(), dto.getConclusao().getDataEncerramento(),
                         dto.getConclusao().getCriterioConfirmacao(), evolucao, caso);
+
 
                 service.inserir(conclusion);
                 return new ResponseEntity<String>(conclusion.toString(), HttpStatus.OK);

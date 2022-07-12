@@ -52,6 +52,11 @@ public class Paciente {
 
     public Paciente(String name, Boolean hiv, String telefone, String nomeMae, Float peso, Boolean gestante,
             Long numCartaoSus, EtniaEnum etniaEnum, String escolaridade, String sexo) {
+
+                if(name.isBlank() || name.isEmpty()) {
+                    throw new IllegalArgumentException("Nome não pode ser vazio ou nulo");
+                }
+
         this.name = name;
         this.hiv = hiv;
         this.telefone = telefone;
@@ -174,7 +179,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "´paciente: {id:" + id + ", name:" + name + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
+        return "Paciente: {id:" + id + ", name:" + name + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
                 + nomeMae + ", peso:" + peso + ", gestante:" + gestante + ", numCartaoSus:" + numCartaoSus
                 + ", etniaEnum:" + etniaEnum + ", escolaridade:" + escolaridade + ", sexo:" + sexo + "}";
     }

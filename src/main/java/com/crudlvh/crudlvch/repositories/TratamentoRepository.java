@@ -9,4 +9,6 @@ import com.crudlvh.crudlvch.entities.Tratamento;
 public interface TratamentoRepository extends JpaRepository<Tratamento, Long> {
     
     Tratamento getById(Long tratamentoId);
+
+    Tratamento getByCasoId(Long tratamentoId);
 }

@@ -1,6 +1,10 @@
 package com.crudlvh.crudlvch.controller;
 
+import java.net.http.HttpResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,12 +34,21 @@ public class RegistroTratamentoInicialController {
     }
 
     @PostMapping(value = "/inserir/{id}")
-    public Tratamento inserir(@PathVariable Long id, @RequestBody TratamentoDTO dto){
-         CasoLVC caso = casoService.encontrarPorId(id);
+    public ResponseEntity<String> inserir(@PathVariable Long id, @RequestBody TratamentoDTO dto) {
+        CasoLVC caso = casoService.encontrarPorId(id);
 
-         Tratamento t = new Tratamento(dto.getTratamento().getDataRegistro(), dto.getTratamento().getDroga(), dto.getTratamento().getDosagem(), caso);
-         service.inserir(t);
-         return t;
+        Tratamento tratamento = service.findByCasoId(caso.getId());
+
+        if (tratamento != null) {
+            return new ResponseEntity<String>("", HttpStatus.BAD_REQUEST);
+
+        }
+        ;
+
+        Tratamento t = new Tratamento(dto.getTratamento().getDataRegistro(), dto.getTratamento().getDroga(),
+                dto.getTratamento().getDosagem(), caso);
+        service.inserir(t);
+        return new ResponseEntity<String>(t.toString(), HttpStatus.OK);
     }
 
 }

@@ -65,7 +65,6 @@ public class ListarCasosLVC {
 
                 JSONObject jo = new JSONObject(casoCompleto.toString());
                 json.add(jo);
-                System.out.println(jo.toString());
 
             }
 

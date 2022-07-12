@@ -87,14 +87,6 @@ public class CasoCompleto {
                 + geoLocalizacao.toString() + ",\nSintomas:" + sintomas.toString() + "}}";
     }
 
-    public String sintomasToString() {
-        String sintomas = "";
-        for (Sintoma sintoma : this.sintomas) {
-            sintomas += sintoma.toString() + "\n";
-        }
-        return sintomas;
-    }
-
     private Endereco endereco;
 
     public CasoCompleto(CasoLVC caso, List<Sintoma> sintomas, Paciente paciente, Endereco endereco,

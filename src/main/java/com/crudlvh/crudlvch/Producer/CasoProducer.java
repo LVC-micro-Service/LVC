@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.crudlvh.crudlvch.dto.CasoLVCDTO;
+import com.crudlvh.crudlvch.dto.ProducerDTO;
 
 @Component
 public class CasoProducer {
@@ -24,7 +24,7 @@ public class CasoProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void casoProducerMensagem(CasoLVCDTO caso){
+    public void casoProducerMensagem(ProducerDTO caso){
         rabbitTemplate.convertAndSend(exchange, routingKey, caso);
     }
 }

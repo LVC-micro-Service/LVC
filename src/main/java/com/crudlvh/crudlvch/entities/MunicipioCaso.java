@@ -11,10 +11,10 @@ import javax.persistence.Table;
 @Entity(name = "MunicipioCaso")
 @Table(name = "municipio_caso")
 public class MunicipioCaso {
-    
+
     @EmbeddedId
     private MunicipioCasoId id;
- 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("casoId")
     private CasoLVC caso;
@@ -41,7 +41,7 @@ public class MunicipioCaso {
 
     @Column(name = "codigoIbge")
     private String codigoIbge;
- 
+
     public MunicipioCaso(CasoLVC caso, Paciente paciente, String codigoIbge) {
         this.caso = caso;
         this.paciente = paciente;
@@ -61,6 +61,11 @@ public class MunicipioCaso {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MunicipioCaso:{codigoIbge:" + codigoIbge + ", id:" + id.toString() + "}";
     }
 
     @Override
@@ -89,6 +94,5 @@ public class MunicipioCaso {
             return false;
         return true;
     }
-    
-    
+
 }

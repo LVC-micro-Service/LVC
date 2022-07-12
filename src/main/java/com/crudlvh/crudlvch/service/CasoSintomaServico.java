@@ -14,8 +14,8 @@ public class CasoSintomaServico {
     @Autowired
     private CasoSintomaRepository repository;
     
-    public void inserir(CasoSintoma casoSintoma){
-        repository.save(casoSintoma);
+    public CasoSintoma inserir(CasoSintoma casoSintoma){
+       return repository.save(casoSintoma);
     }
     
     public List<CasoSintoma> findSintomas(Long id){

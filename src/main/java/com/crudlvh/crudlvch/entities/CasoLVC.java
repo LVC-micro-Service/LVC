@@ -1,6 +1,5 @@
 package com.crudlvh.crudlvch.entities;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +18,6 @@ import java.util.List;
 @Table(name = "casoLVC")
 public class CasoLVC {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,10 +31,9 @@ public class CasoLVC {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MunicipioCaso> pacientes = new ArrayList<MunicipioCaso>();
 
-    @OneToMany(mappedBy = "id", cascade   = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tratamento> tratamentos = new ArrayList<Tratamento>();
 
-    
     public CasoLVC() {
     }
 
@@ -46,7 +43,7 @@ public class CasoLVC {
     }
 
     public CasoLVC(Long id, Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
-    List<Tratamento> tratamentos) {
+            List<Tratamento> tratamentos) {
         this.id = id;
         this.dataRegistro = dataRegistro;
         this.sintomas = sintomas;
@@ -55,17 +52,17 @@ public class CasoLVC {
     }
 
     public CasoLVC(Date dataRegistro, List<CasoSintoma> sintomas, List<MunicipioCaso> pacientes,
-    List<Tratamento> tratamentos) {
+            List<Tratamento> tratamentos) {
         this.dataRegistro = dataRegistro;
         this.sintomas = sintomas;
         this.pacientes = pacientes;
         this.tratamentos = tratamentos;
     }
-    
+
     public Long getId() {
         return id;
     }
-    
+
     public Date getDataRegistro() {
         return dataRegistro;
     }
@@ -73,20 +70,23 @@ public class CasoLVC {
     public void setDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
-    
-    public CasoLVC(Date dataRegistro){
+
+    public CasoLVC(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
-    public void setCasoId(Long id){
+    public void setCasoId(Long id) {
         this.id = id;
     }
-    
+
     @Override
     public String toString() {
-        return "CasoLVC [dataRegistro=" + dataRegistro + ", pacientes=" + pacientes + ", sintomas=" + sintomas
-                + ", tratamentos=" + tratamentos + "]";
+        return "CasoLVC:{id: " + id + ", dataRegistro:" + dataRegistro + ", sintomas:" + sintomas.toString()
+                + ", tratamentos:" + tratamentos.toString() + "}";
     }
-    
-    
+
+    public String casoToStringProducer() {
+        return "CasoLVC:{id: " + id + ", dataRegistro:" + dataRegistro + "}";
+    }
+
 }

@@ -12,8 +12,8 @@ public class MunicipioCasoServico {
     @Autowired
     private MunicipioCasoRepository repository;
     
-    public void inserir(MunicipioCaso municipioCaso){
-        repository.save(municipioCaso);
+    public MunicipioCaso inserir(MunicipioCaso municipioCaso){
+        return repository.save(municipioCaso);
     }
 
     public MunicipioCaso findMunicipioByCasoId(Long id){

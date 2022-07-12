@@ -12,7 +12,7 @@ public class EnderecoServico {
     @Autowired
     private EnderecoRepository repository;
 
-    public void inserir(Endereco endereco) {
-        repository.save(endereco);
+    public Endereco inserir(Endereco endereco) {
+        return repository.save(endereco);
     }
 }

@@ -1,5 +1,6 @@
 package com.crudlvh.crudlvch.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crudlvh.crudlvch.dto.CasoLVCDTO;
+import com.crudlvh.crudlvch.dto.ProducerDTO;
 import com.crudlvh.crudlvch.entities.CasoSintoma;
 import com.crudlvh.crudlvch.entities.Endereco;
 import com.crudlvh.crudlvch.entities.GeoLocalizacao;
@@ -60,20 +62,32 @@ public class RegistroCasoLVC {
     return capturarCaso(dto);
   }
 
+  private void sendMessage(ProducerDTO dto) {
+    servico.sendStatistic(dto);
+  }
+
   @Transactional(rollbackOn = Exception.class)
   public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
     CasoLVC caso = new CasoLVC(dto.getId(), dto.getDataRegistro());
     boolean codigo = dto.getCodigoIbge() == null;
     try {
       if (!codigo) {
-        servico.inserir(caso, dto);
-        System.out.println(dto.getCodigoIbge() + "a");
+        CasoLVC casoLVC = servico.inserir(caso);
         List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
         salvarSintomas(sintomas, caso);
         Paciente paciente = salvarPaciente(dto);
         salvarMunicipioCaso(caso, paciente, dto);
         Endereco endereco = salvarEndereco(paciente, dto);
         salvaGeoLocalizacao(endereco, dto);
+
+        ProducerDTO producer = new ProducerDTO();
+        producer.setCaso(casoLVC);
+        producer.setPaciente(paciente);
+        producer.setCodigoIbge(dto.getCodigoIbge());
+        // JSONObject ja = new JSONObject(producer.toString());
+        // System.out.println(producer.toString());
+        sendMessage(producer);
+        
         return new ResponseEntity<>("Caso registrado com sucesso", HttpStatus.OK);
       } else if (codigo) {
         throw new NullPointerException("É necessário informar o código ibge do município de contaminação");
@@ -87,14 +101,15 @@ public class RegistroCasoLVC {
     }
   }
 
-  private boolean salvarSintomas(List<Sintoma> sintomas, CasoLVC caso) {
-
+  private List<CasoSintoma> salvarSintomas(List<Sintoma> sintomas, CasoLVC caso) {
+    List<CasoSintoma> casosSintomas = new ArrayList<>();
     for (Sintoma item : sintomas) {
       Sintoma sintoma = sintomaServico.findSintomaById(item.getId());
       CasoSintoma casoSintoma = new CasoSintoma(caso, sintoma);
-      casoSintomaServico.inserir(casoSintoma);
+
+      casosSintomas.add(casoSintomaServico.inserir(casoSintoma));
     }
-    return true;
+    return casosSintomas;
   }
 
   private Paciente salvarPaciente(CasoLVCDTO dto) {
@@ -102,14 +117,14 @@ public class RegistroCasoLVC {
         dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
         dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
         dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
-    
+
     return pacienteServico.inserir(paciente);
   }
 
-  private boolean salvarMunicipioCaso(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {
+  private MunicipioCaso salvarMunicipioCaso(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {
     MunicipioCaso municipioCaso = new MunicipioCaso(caso, paciente, dto.getCodigoIbge());
-    municipioCasoServico.inserir(municipioCaso);
-    return true;
+
+    return municipioCasoServico.inserir(municipioCaso);
   }
 
   private Endereco salvarEndereco(Paciente paciente, CasoLVCDTO dto) {
@@ -119,9 +134,8 @@ public class RegistroCasoLVC {
         dto.getPaciente().getEndereco().getDistrito(), dto.getPaciente().getEndereco().getBairro(),
         dto.getPaciente().getEndereco().getLogradouro(), dto.getPaciente().getEndereco().getComplemento(),
         dto.getPaciente().getEndereco().getNumeroCasa());
-    enderecoServico.inserir(endereco);
 
-    return endereco;
+    return enderecoServico.inserir(endereco);
   }
 
   private void salvaGeoLocalizacao(Endereco endereco, CasoLVCDTO dto) {

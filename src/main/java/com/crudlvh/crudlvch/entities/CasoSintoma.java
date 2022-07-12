@@ -1,6 +1,5 @@
 package com.crudlvh.crudlvch.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -32,6 +31,7 @@ public class CasoSintoma {
         this.sintoma = sintoma;
         this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
     }
+
     public CasoSintoma(CasoLVC caso, Sintoma sintoma, String outro) {
         this.caso = caso;
         this.sintoma = sintoma;
@@ -40,7 +40,7 @@ public class CasoSintoma {
     }
 
     public CasoSintoma() {
-      
+
     }
 
     public CasoSintomaId getId() {
@@ -75,5 +75,9 @@ public class CasoSintoma {
         this.outro = outro;
     }
 
-    
+    @Override
+    public String toString() {
+        return "{outro:" + outro + ", sintoma:" + sintoma.toString() + "}";
+    }
+
 }

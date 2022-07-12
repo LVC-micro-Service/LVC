@@ -64,6 +64,7 @@ public class Paciente {
         this.sexo = sexo;
     }
 
+
     public Paciente() {
     }
 
@@ -173,7 +174,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente: {id:" + id + ", name:" + name + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
+        return "´paciente: {id:" + id + ", name:" + name + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
                 + nomeMae + ", peso:" + peso + ", gestante:" + gestante + ", numCartaoSus:" + numCartaoSus
                 + ", etniaEnum:" + etniaEnum + ", escolaridade:" + escolaridade + ", sexo:" + sexo + "}";
     }

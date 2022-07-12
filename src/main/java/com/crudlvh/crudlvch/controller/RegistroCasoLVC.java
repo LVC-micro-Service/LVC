@@ -75,14 +75,14 @@ public class RegistroCasoLVC {
         Endereco endereco = salvarEndereco(paciente, dto);
         salvaGeoLocalizacao(endereco, dto);
         return new ResponseEntity<>("Caso registrado com sucesso", HttpStatus.OK);
-      } else if(codigo) {
+      } else if (codigo) {
         throw new NullPointerException("É necessário informar o código ibge do município de contaminação");
-      }else{
+      } else {
         throw new Exception();
       }
     } catch (NullPointerException e) {
-      return new ResponseEntity<String>(""+e.getMessage(), HttpStatus.BAD_REQUEST);
-    }catch (Exception e) {
+      return new ResponseEntity<String>("" + e.getMessage(), HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
       return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
   }
@@ -102,8 +102,8 @@ public class RegistroCasoLVC {
         dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
         dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
         dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
-    pacienteServico.inserir(paciente);
-    return paciente;
+    
+    return pacienteServico.inserir(paciente);
   }
 
   private boolean salvarMunicipioCaso(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {

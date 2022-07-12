@@ -12,8 +12,8 @@ public class PacienteServico {
     @Autowired
     private PacienteRepository repository;
 
-    public void inserir(Paciente paciente) {
-        repository.save(paciente);
+    public Paciente inserir(Paciente paciente) {
+        return repository.save(paciente);
     }
 
     public Paciente findPacienteById(Long id) {

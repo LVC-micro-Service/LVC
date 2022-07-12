@@ -2,6 +2,8 @@ package com.crudlvh.crudlvch.controller;
 
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ public class RegistroConclusaoController {
     @Autowired
     private CasoLVCServico casoServico;
 
+    @Transactional(rollbackOn= {Exception.class, NullPointerException.class})
     @PostMapping(value = "/conclusao/{id}")
     public ResponseEntity<String> salvarConclusao(@PathVariable Long id, @RequestBody ConclusaoDTO dto) {
 

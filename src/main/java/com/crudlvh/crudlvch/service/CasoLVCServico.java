@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crudlvh.crudlvch.dto.CasoLVCDTO;
 import com.crudlvh.crudlvch.entities.CasoLVC;
 import com.crudlvh.crudlvch.entities.CasoSintoma;
 import com.crudlvh.crudlvch.producer.CasoProducer;
@@ -31,9 +32,10 @@ public class CasoLVCServico {
         return repository.getById(id);
     }
     
-    public void inserir(CasoLVC caso) {
-        repository.save(caso);
-        casoProducer.casoProducerMensagem(caso);
+    public void inserir(CasoLVC caso, CasoLVCDTO casoLVCDTO) {
+        CasoLVC casoDone = repository.save(caso);
+        casoLVCDTO.setId(casoDone.getId());
+        casoProducer.casoProducerMensagem(casoLVCDTO);
     }
 
     public List<CasoLVC> listarCasos(){

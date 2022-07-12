@@ -77,6 +77,10 @@ public class CasoLVC {
     public CasoLVC(Date dataRegistro){
         this.dataRegistro = dataRegistro;
     }
+
+    public void setCasoId(Long id){
+        this.id = id;
+    }
     
     @Override
     public String toString() {

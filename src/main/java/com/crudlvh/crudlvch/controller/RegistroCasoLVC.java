@@ -55,19 +55,18 @@ public class RegistroCasoLVC {
   private MunicipioCasoServico municipioCasoServico;
 
   @PostMapping("/inserir")
-  public void salvarCasoLVC(@RequestBody CasoLVCDTO dto) {
+  public ResponseEntity<String> salvarCasoLVC(@RequestBody CasoLVCDTO dto) {
 
-    capturarCaso(dto);
+    return capturarCaso(dto);
   }
 
   @Transactional(rollbackOn = Exception.class)
   public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
     CasoLVC caso = new CasoLVC(dto.getId(), dto.getDataRegistro());
-    System.out.println(dto.getCodigoIbge() + "b");
+    boolean codigo = dto.getCodigoIbge() == null;
     try {
-      servico.inserir(caso);
-      boolean codigo = dto.getCodigoIbge() == null;
       if (!codigo) {
+        servico.inserir(caso, dto);
         System.out.println(dto.getCodigoIbge() + "a");
         List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
         salvarSintomas(sintomas, caso);
@@ -82,7 +81,7 @@ public class RegistroCasoLVC {
         throw new Exception();
       }
     } catch (NullPointerException e) {
-      return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<String>(""+e.getMessage(), HttpStatus.BAD_REQUEST);
     }catch (Exception e) {
       return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }

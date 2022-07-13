@@ -17,12 +17,8 @@ public class CasoProducer {
     @Value("routingKeyCaso")
     String routingKey;
 
-    private RabbitTemplate rabbitTemplate;
-
     @Autowired
-    public CasoProducer(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
+    private RabbitTemplate rabbitTemplate;
 
     public void casoProducerMensagem(ProducerDTO caso){
         rabbitTemplate.convertAndSend(exchange, routingKey, caso);

@@ -24,6 +24,13 @@ public class Sintoma {
     @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CasoSintoma> casos = new ArrayList<CasoSintoma>();
 
+    public Sintoma(Long id, String string) {
+        this.id = id;
+        this.name = string;
+    }
+
+    public Sintoma() {
+    }
     public void setId(Long id) {
         this.id = id;
     }

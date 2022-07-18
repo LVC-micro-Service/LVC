@@ -48,43 +48,46 @@ public class CasoLVCServico {
 
         casoSintomaRepository.save(casoSintoma);
     }
-    
+
     public CasoLVC encontrarPorId(Long id) {
         return repository.getById(id);
     }
 
-    public void sendStatistic(ProducerDTO casoLVCDTO){
+    public void sendStatistic(ProducerDTO casoLVCDTO) {
         casoProducer.casoProducerMensagem(casoLVCDTO);
     }
-    
-    public CasoLVC inserir(CasoLVCDTO dto) {
 
-    boolean codigo = dto.getCodigoIbge() == null;
+    private CasoLVC inserir(CasoLVCDTO dto) {
+        CasoLVC casoLVC = new CasoLVC(dto.getDataRegistro());
+        return repository.save(casoLVC);
+    }
 
-        if(!codigo){
-            CasoLVC casoLVC = new CasoLVC(dto.getDataRegistro());
-            repository.save(casoLVC);
+    public CasoLVC criarCaso(CasoLVCDTO dto) {
+        boolean codigo = dto.getCodigoIbge() == null;
+
+        if (!codigo && !dto.getPaciente().equals(null)) {
+            CasoLVC casoLVC = inserir(dto);
             List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
             casoSintomaServico.salvarSintomas(sintomas, casoLVC);
             Paciente paciente = pacienteServico.salvarPaciente(dto);
             municipioCasoServico.salvarMunicipioCaso(casoLVC, paciente, dto);
             Endereco endereco = enderecoServico.salvarEndereco(paciente, dto);
             geoLocalizacaoServico.salvaGeoLocalizacao(endereco, dto);
-            
+
             ProducerDTO producer = createProducerDTO(casoLVC, paciente, dto);
 
             sendStatistic(producer);
             return repository.save(casoLVC);
-        }else{
-            throw new NullPointerException("Código IBGE não informado");
+        } else {
+            throw new NullPointerException("Código IBGE, Paciente ou Endereço não informado");
         }
     }
 
-    public List<CasoLVC> listarCasos(){
+    public List<CasoLVC> listarCasos() {
         return repository.findAll();
     }
 
-    private ProducerDTO createProducerDTO(CasoLVC caso, Paciente paciente, CasoLVCDTO dto){
+    private ProducerDTO createProducerDTO(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {
         ProducerDTO producer = new ProducerDTO();
         producer.setCaso(caso);
         producer.setPaciente(paciente);

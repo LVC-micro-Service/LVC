@@ -32,7 +32,7 @@ public class RegistroCasoLVC {
   @Transactional(rollbackOn = {Exception.class, NullPointerException.class})
   public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
     try {
-        servico.inserir(dto);
+        servico.criarCaso(dto);
         return new ResponseEntity<>("Caso registrado com sucesso", HttpStatus.OK);
     } catch (NullPointerException e) {
       return new ResponseEntity<String>("" + e.getMessage(), HttpStatus.BAD_REQUEST);

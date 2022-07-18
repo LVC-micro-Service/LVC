@@ -5,10 +5,10 @@ import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
-
 
 
 public class CasoLVCDTO {
@@ -20,7 +20,6 @@ public class CasoLVCDTO {
 
     private String codigoIbge;
 
-    @NotBlank
     private List<Sintoma> sintomas;
     
     private Paciente paciente;
@@ -48,6 +47,30 @@ public class CasoLVCDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public void setCodigoIbge(String codigoIbge) {
+        this.codigoIbge = codigoIbge;
+    }
+
+    public void setSintomas(List<Sintoma> sintomas) {
+        this.sintomas = sintomas;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public CasoLVCDTO(Date dataRegistro, String codigoIbge, @NotBlank List<Sintoma> sintomas, Paciente paciente) {
+        this.dataRegistro = dataRegistro;
+        this.codigoIbge = codigoIbge;
+        this.sintomas = sintomas;
+        this.paciente = paciente;
+    }
    
+    
     
 }

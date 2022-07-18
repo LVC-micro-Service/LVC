@@ -1,8 +1,6 @@
 package com.crudlvh.crudlvch.controller;
 
 
-import java.net.ConnectException;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

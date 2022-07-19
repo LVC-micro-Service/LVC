@@ -63,7 +63,7 @@ public class CasoLVCServico {
     }
 
     public CasoLVC criarCaso(CasoLVCDTO dto) {
-        boolean codigo = dto.getCodigoIbge() == null;
+        boolean codigo = dto.getCodigoIbge() == null || dto.getCodigoIbge().equals("");
 
         if (!codigo && !dto.getPaciente().equals(null)) {
             CasoLVC casoLVC = inserir(dto);

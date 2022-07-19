@@ -1,6 +1,5 @@
 package com.crudlvh.crudlvch;
 
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -33,55 +33,140 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureMockMvc
 public class RegistroCasoTest {
 
-    static final String URL = "/caso";
-    static final MediaType JSON = MediaType.APPLICATION_JSON;
+        static final String URL = "/caso";
+        static final MediaType JSON = MediaType.APPLICATION_JSON;
 
-    @Autowired
-    MockMvc mvc;
+        @Autowired
+        MockMvc mvc;
 
-    @MockBean
-    CasoLVCServico servico;
+        @MockBean
+        CasoLVCServico servico;
 
-    @Test
-    public void criarCaso() throws Exception {
+        @Test
+        public void criarCaso() throws Exception {
 
-        Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
-        String codigoIbge = null;
-        Long l = (long) 1;
-        Sintoma s = new Sintoma(l, "Febre");
-        List<Sintoma> sintomas = new ArrayList<Sintoma>();
-        sintomas.add(s);
-        Float peso = (float) 80;
-        Long numCartaoSus = (long) 1111111111;
+                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+                Long l = (long) 1;
+                String codigoIbge = "1010";
+                Sintoma s = new Sintoma(l, "Febre");
+                List<Sintoma> sintomas = new ArrayList<Sintoma>();
+                sintomas.add(s);
+                Float peso = (float) 80;
+                Long numCartaoSus = (long) 1111111111;
 
-        Paciente p = new Paciente(
-                "test-spring",
-                false, "62992417500",
-                "mãe teste-spring",
-                peso,
-                false,
-                numCartaoSus,
-                EtniaEnum.valueOf("Branca"),
-                "Ensino Médio",
-                "Masculino");
+                Paciente p = new Paciente(
+                                "test-spring",
+                                false, "62992417500",
+                                "mãe teste-spring",
+                                peso,
+                                false,
+                                numCartaoSus,
+                                EtniaEnum.valueOf("Branca"),
+                                "Ensino Médio",
+                                "Masculino");
 
-        CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
+                CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
 
-        String json = new ObjectMapper().writeValueAsString(dto);
+                String json = new ObjectMapper().writeValueAsString(dto);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(URL.concat("/inserir"))
-                .accept(JSON)
-                .contentType(JSON)
-                .content(json);
+                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                                .post(URL.concat("/inserir"))
+                                .accept(JSON)
+                                .contentType(JSON)
+                                .content(json);
 
-        when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
+                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
 
-        MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn();
+                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk())
+                                .andReturn();
 
-        String content = result.getResponse().getContentAsString();
-        System.out.println(content);
-        // assertEquals("200", actual);
-    }
+                String content = result.getResponse().getContentAsString();
+                System.out.println(content);
+                // assertEquals("200", actual);
+        }
+
+        @Test
+        public void criarCasoSemCodigoIbge() throws Exception {
+
+                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+                Long l = (long) 1;
+                String codigoIbge = "";
+                Sintoma s = new Sintoma(l, "Febre");
+                List<Sintoma> sintomas = new ArrayList<Sintoma>();
+                sintomas.add(s);
+                Float peso = (float) 80;
+                Long numCartaoSus = (long) 1111111111;
+
+                Paciente p = new Paciente(
+                                "test-spring",
+                                false, "62992417500",
+                                "mãe teste-spring",
+                                peso,
+                                false,
+                                numCartaoSus,
+                                EtniaEnum.valueOf("Branca"),
+                                "Ensino Médio",
+                                "Masculino");
+
+                CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
+
+                String json = new ObjectMapper().writeValueAsString(dto);
+
+                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                                .post(URL.concat("/inserir"))
+                                .accept(JSON)
+                                .contentType(JSON)
+                                .content(json);
+
+                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
+
+                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
+                                .andReturn();
+
+                String content = result.getResponse().getContentAsString();
+                System.out.println(content);
+                // assertEquals("200", actual);
+        }
+
+        public void criarCasoSemPaciente() throws Exception {
+
+                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+                Long l = (long) 1;
+                String codigoIbge = "";
+                Sintoma s = new Sintoma(l, "Febre");
+                List<Sintoma> sintomas = new ArrayList<Sintoma>();
+                sintomas.add(s);
+                Float peso = (float) 80;
+                Long numCartaoSus = (long) 1111111111;
+
+                Paciente p = new Paciente(
+                                "test-spring",
+                                false, "62992417500",
+                                "mãe teste-spring",
+                                peso,
+                                false,
+                                numCartaoSus,
+                                EtniaEnum.valueOf("Branca"),
+                                "Ensino Médio",
+                                "Masculino");
+
+                CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
+
+                String json = new ObjectMapper().writeValueAsString(dto);
+
+                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                                .post(URL.concat("/inserir"))
+                                .accept(JSON)
+                                .contentType(JSON)
+                                .content(json);
+
+                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
+
+                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
+                                .andReturn();
+
+                String content = result.getResponse().getContentAsString();
+                System.out.println(content);
+                // assertEquals("200", actual);
+        }
 }

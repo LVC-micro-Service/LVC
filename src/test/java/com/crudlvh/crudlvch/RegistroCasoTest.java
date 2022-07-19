@@ -85,87 +85,87 @@ public class RegistroCasoTest {
                 // assertEquals("200", actual);
         }
 
-        @Test
-        public void criarCasoSemCodigoIbge() throws Exception {
+        // @Test
+        // public void criarCasoSemCodigoIbge() throws Exception {
 
-                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
-                Long l = (long) 1;
-                String codigoIbge = "";
-                Sintoma s = new Sintoma(l, "Febre");
-                List<Sintoma> sintomas = new ArrayList<Sintoma>();
-                sintomas.add(s);
-                Float peso = (float) 80;
-                Long numCartaoSus = (long) 1111111111;
+        //         Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+        //         Long l = (long) 1;
+        //         String codigoIbge = "";
+        //         Sintoma s = new Sintoma(l, "Febre");
+        //         List<Sintoma> sintomas = new ArrayList<Sintoma>();
+        //         sintomas.add(s);
+        //         Float peso = (float) 80;
+        //         Long numCartaoSus = (long) 1111111111;
 
-                Paciente p = new Paciente(
-                                "test-spring",
-                                false, "62992417500",
-                                "mãe teste-spring",
-                                peso,
-                                false,
-                                numCartaoSus,
-                                EtniaEnum.valueOf("Branca"),
-                                "Ensino Médio",
-                                "Masculino");
+        //         Paciente p = new Paciente(
+        //                         "test-spring",
+        //                         false, "62992417500",
+        //                         "mãe teste-spring",
+        //                         peso,
+        //                         false,
+        //                         numCartaoSus,
+        //                         EtniaEnum.valueOf("Branca"),
+        //                         "Ensino Médio",
+        //                         "Masculino");
 
-                CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
+        //         CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
 
-                String json = new ObjectMapper().writeValueAsString(dto);
+        //         String json = new ObjectMapper().writeValueAsString(dto);
 
-                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                                .post(URL.concat("/inserir"))
-                                .accept(JSON)
-                                .contentType(JSON)
-                                .content(json);
+        //         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+        //                         .post(URL.concat("/inserir"))
+        //                         .accept(JSON)
+        //                         .contentType(JSON)
+        //                         .content(json);
 
-                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
+        //         Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
 
-                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                                .andReturn();
+        //         MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
+        //                         .andReturn();
 
-                String content = result.getResponse().getContentAsString();
-                System.out.println(content);
-        }
+        //         String content = result.getResponse().getContentAsString();
+        //         System.out.println(content);
+        // }
 
-        @Test
-        public void criarCasoSemPaciente() throws Exception {
+        // @Test
+        // public void criarCasoSemPaciente() throws Exception {
 
-                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
-                Long l = (long) 1;
-                String codigoIbge = "";
-                Sintoma s = new Sintoma(l, "Febre");
-                List<Sintoma> sintomas = new ArrayList<Sintoma>();
-                sintomas.add(s);
-                Float peso = (float) 80;
-                Long numCartaoSus = (long) 1111111111;
+        //         Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+        //         Long l = (long) 1;
+        //         String codigoIbge = "";
+        //         Sintoma s = new Sintoma(l, "Febre");
+        //         List<Sintoma> sintomas = new ArrayList<Sintoma>();
+        //         sintomas.add(s);
+        //         Float peso = (float) 80;
+        //         Long numCartaoSus = (long) 1111111111;
 
-                Paciente p = new Paciente(
-                                "test-spring",
-                                false, "62992417500",
-                                "mãe teste-spring",
-                                peso,
-                                false,
-                                numCartaoSus,
-                                EtniaEnum.valueOf("Branca"),
-                                "Ensino Médio",
-                                "Masculino");
+        //         Paciente p = new Paciente(
+        //                         "test-spring",
+        //                         false, "62992417500",
+        //                         "mãe teste-spring",
+        //                         peso,
+        //                         false,
+        //                         numCartaoSus,
+        //                         EtniaEnum.valueOf("Branca"),
+        //                         "Ensino Médio",
+        //                         "Masculino");
 
-                CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
+        //         CasoLVCDTO dto = new CasoLVCDTO(d, codigoIbge, sintomas, p);
 
-                String json = new ObjectMapper().writeValueAsString(dto);
+        //         String json = new ObjectMapper().writeValueAsString(dto);
 
-                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                                .post(URL.concat("/inserir"))
-                                .accept(JSON)
-                                .contentType(JSON)
-                                .content(json);
+        //         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+        //                         .post(URL.concat("/inserir"))
+        //                         .accept(JSON)
+        //                         .contentType(JSON)
+        //                         .content(json);
 
-                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
+        //         Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
 
-                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                                .andReturn();
+        //         MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
+        //                         .andReturn();
 
-                String content = result.getResponse().getContentAsString();
-                System.out.println(content);
-        }
+        //         String content = result.getResponse().getContentAsString();
+        //         System.out.println(content);
+        // }
 }

@@ -13,12 +13,13 @@ import com.crudlvh.crudlvch.entities.CasoSintoma;
 import com.crudlvh.crudlvch.entities.Endereco;
 import com.crudlvh.crudlvch.entities.Paciente;
 import com.crudlvh.crudlvch.entities.Sintoma;
+import com.crudlvh.crudlvch.interfaces.ICasoLVCService;
 import com.crudlvh.crudlvch.producer.CasoProducer;
 import com.crudlvh.crudlvch.repositories.CasoLVCRepository;
 import com.crudlvh.crudlvch.repositories.CasoSintomaRepository;
 
 @Service
-public class CasoLVCServico {
+public class CasoLVCServico implements ICasoLVCService{
 
     @Autowired
     private CasoProducer casoProducer;
@@ -62,10 +63,21 @@ public class CasoLVCServico {
         return repository.save(casoLVC);
     }
 
+    @Override
     public CasoLVC criarCaso(CasoLVCDTO dto) {
         boolean codigo = dto.getCodigoIbge() == null || dto.getCodigoIbge().equals("");
+        boolean p = true;
+        try{
+            p = dto.getPaciente().equals(null);
 
-        if (!codigo && !dto.getPaciente().equals(null)) {
+        }catch(NullPointerException e){
+            throw new NullPointerException("Paciente não informado");
+        }
+        System.out.println(codigo);
+        System.out.println(p);
+
+
+        if (codigo == false && !p == true){
             CasoLVC casoLVC = inserir(dto);
             List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
             casoSintomaServico.salvarSintomas(sintomas, casoLVC);
@@ -79,7 +91,7 @@ public class CasoLVCServico {
             sendStatistic(producer);
             return repository.save(casoLVC);
         } else {
-            throw new NullPointerException("Código IBGE, Paciente ou Endereço não informado");
+            throw new NullPointerException("Código IBGE não informado");
         }
     }
 

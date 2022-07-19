@@ -70,5 +70,9 @@ public class CasoLVCDTO {
         this.sintomas = sintomas;
         this.paciente = paciente;
     }
+
+    public CasoLVCDTO() {
+        
+    }
     
 }

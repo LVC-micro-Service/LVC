@@ -3,6 +3,9 @@ package com.crudlvh.crudlvch.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ import com.crudlvh.crudlvch.repositories.CasoLVCRepository;
 import com.crudlvh.crudlvch.repositories.CasoSintomaRepository;
 
 @Service
-public class CasoLVCServico implements ICasoLVCService{
+public class CasoLVCServico implements ICasoLVCService {
 
     @Autowired
     private CasoProducer casoProducer;
@@ -64,20 +67,23 @@ public class CasoLVCServico implements ICasoLVCService{
     }
 
     @Override
+    @Transactional(rollbackOn = ConstraintViolationException.class)
     public CasoLVC criarCaso(CasoLVCDTO dto) {
-        boolean codigo = dto.getCodigoIbge() == null || dto.getCodigoIbge().equals("");
+        boolean codigo = false;
+        try {
+            codigo = dto.getCodigoIbge() == null || dto.getCodigoIbge().equals("");
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Código Ibge não informado");
+        }
         boolean p = true;
-        try{
+        try {
             p = dto.getPaciente().equals(null);
 
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             throw new NullPointerException("Paciente não informado");
         }
-        System.out.println(codigo);
-        System.out.println(p);
 
-
-        if (codigo == false && !p == true){
+        if (codigo == false && !p == true) {
             CasoLVC casoLVC = inserir(dto);
             List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
             casoSintomaServico.salvarSintomas(sintomas, casoLVC);

@@ -79,6 +79,20 @@ public class CasoLVC {
         this.id = id;
     }
 
+    
+
+    public List<CasoSintoma> getSintomas() {
+        return sintomas;
+    }
+
+    public List<MunicipioCaso> getPacientes() {
+        return pacientes;
+    }
+
+    public List<Tratamento> getTratamentos() {
+        return tratamentos;
+    }
+
     @Override
     public String toString() {
         return "CasoLVC:{id: " + id + ", dataRegistro:" + dataRegistro + ", sintomas:" + sintomas.toString()

@@ -1,5 +1,6 @@
 package com.crudlvh.crudlvch;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -84,76 +85,71 @@ public class RegistroCasoTest {
                 // assertEquals("200", actual);
         }
 
-        @Test
-        public void criarCasoSemCodigoIbge() throws Exception {
+        // @Test
+        // public void criarCasoSemCodigoIbge() throws Exception {
 
-                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
-                String codigoIbge = "";
-                Long l = (long) 1;
-                Sintoma s = new Sintoma(l, "Febre");
-                List<Sintoma> sintomas = new ArrayList<Sintoma>();
-                sintomas.add(s);
-                Float peso = (float) 80;
-                Long numCartaoSus = (long) 1111111111;
+        //         Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+        //         String codigoIbge = "";
+        //         Long l = (long) 1;
+        //         Sintoma s = new Sintoma(l, "Febre");
+        //         List<Sintoma> sintomas = new ArrayList<Sintoma>();
+        //         sintomas.add(s);
+        //         Float peso = (float) 80;
+        //         Long numCartaoSus = (long) 1111111111;
 
-                Paciente p = new Paciente(
-                                "test-spring",
-                                false, "62992417500",
-                                "mãe teste-spring",
-                                peso,
-                                false,
-                                numCartaoSus,
-                                EtniaEnum.valueOf("Branca"),
-                                "Ensino Médio",
-                                "Masculino");
+        //         Paciente p = new Paciente(
+        //                         "test-spring",
+        //                         false, "62992417500",
+        //                         "mãe teste-spring",
+        //                         peso,
+        //                         false,
+        //                         numCartaoSus,
+        //                         EtniaEnum.valueOf("Branca"),
+        //                         "Ensino Médio",
+        //                         "Masculino");
 
-                CasoLVCDTO dto = new CasoLVCDTO();
-                dto.setCodigoIbge(codigoIbge);
-                dto.setDataRegistro(d);
-                dto.setPaciente(p);
+        //         CasoLVCDTO dto = new CasoLVCDTO();
+        //         dto.setCodigoIbge(codigoIbge);
+        //         dto.setDataRegistro(d);
+        //         dto.setPaciente(p);
 
-                String json = new ObjectMapper().writeValueAsString(dto);
+        //         String json = new ObjectMapper().writeValueAsString(dto);
+        //         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+        //                         .post(URL.concat("/inserir"))
+        //                         .accept(JSON)
+        //                         .contentType(JSON)
+        //                         .content(json);
 
-                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                                .post(URL.concat("/inserir"))
-                                .accept(JSON)
-                                .contentType(JSON)
-                                .content(json);
+        //         Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
 
-                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
+        //         MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        //         System.out.println("teste");
+        //         String content = result.getResponse().getContentAsString();
+        //         System.out.println(content);
+        // }
 
-                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        // @Test
+        // public void criarCasoSemPaciente() throws Exception {
 
-                String content = result.getResponse().getContentAsString();
-                System.out.println(content);
-                // assertEquals("200", actual);
-        }
+        //         Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
+        //         String codigoIbge = "1010";
 
-        @Test
-        public void criarCasoSemPaciente() throws Exception {
+        //         CasoLVCDTO dto = new CasoLVCDTO();
 
-                Date d = new GregorianCalendar(2001, 2 - 1, 6).getTime();
-                String codigoIbge = "";
+        //         dto.setCodigoIbge(codigoIbge);
+        //         dto.setDataRegistro(d);
 
-                CasoLVCDTO dto = new CasoLVCDTO();
+        //         String json = new ObjectMapper().writeValueAsString(dto);
 
-                dto.setCodigoIbge(codigoIbge);
-                dto.setDataRegistro(d);
+        //         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+        //                         .post(URL.concat("/inserir"))
+        //                         .accept(JSON)
+        //                         .contentType(JSON)
+        //                         .content(json);
 
-                String json = new ObjectMapper().writeValueAsString(dto);
+        //         Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
 
-                MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                                .post(URL.concat("/inserir"))
-                                .accept(JSON)
-                                .contentType(JSON)
-                                .content(json);
+        //         mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-                Mockito.when(servico.criarCaso(dto)).thenThrow(NullPointerException.class);
-
-                MvcResult result = mvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                                .andReturn();
-
-                String content = result.getResponse().getContentAsString();
-                System.out.println(content);
-        }
+        // }
 }

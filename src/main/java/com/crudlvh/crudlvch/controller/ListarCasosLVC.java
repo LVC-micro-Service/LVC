@@ -26,7 +26,7 @@ import com.crudlvh.crudlvch.service.TratamentoServico;
 import org.json.JSONObject;
 
 @RestController
-@RequestMapping(value = "caso")
+@RequestMapping(value = "/caso")
 public class ListarCasosLVC {
 
     @Autowired
@@ -70,17 +70,13 @@ public class ListarCasosLVC {
 
                 casoCompleto.setTratamento(tratamento);
 
-                // System.out.println(casoCompleto.toString());
-
                 JSONObject jo = new JSONObject(casoCompleto.toString());
-
-                
                 json.add(jo);
-
             }
 
         } catch (Exception e) {
             System.out.println(e.getCause());
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<String>(json.toString(), HttpStatus.OK);
     }

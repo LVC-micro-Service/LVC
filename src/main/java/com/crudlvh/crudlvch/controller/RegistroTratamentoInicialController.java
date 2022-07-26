@@ -39,13 +39,16 @@ public class RegistroTratamentoInicialController {
         Tratamento tratamento = service.findByCasoId(caso.getId());
 
         if (tratamento != null) {
-            return new ResponseEntity<String>("", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("Tratamento inicial já registrado", HttpStatus.BAD_REQUEST);
 
         }
-        ;
 
-        Tratamento t = new Tratamento(dto.getTratamento().getDataRegistro(), dto.getTratamento().getDroga(),
-                dto.getTratamento().getDosagem(), caso);
+        Tratamento t = new Tratamento(
+            dto.getTratamento().getDataRegistro(), 
+            dto.getTratamento().getDroga(),
+            dto.getTratamento().getDosagem(), 
+            caso
+            );
         service.inserir(t);
         return new ResponseEntity<String>(t.toString(), HttpStatus.OK);
     }

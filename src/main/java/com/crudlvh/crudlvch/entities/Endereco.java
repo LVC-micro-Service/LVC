@@ -43,7 +43,7 @@ public class Endereco {
     @Column
     private int numeroCasa;
 
-    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "endereco", cascade = CascadeType.REMOVE)
     @PrimaryKeyJoinColumn
     private GeoLocalizacao geoLocalizacao;
 

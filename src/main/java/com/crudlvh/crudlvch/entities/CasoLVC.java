@@ -25,13 +25,13 @@ public class CasoLVC {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dataRegistro;
 
-    @OneToMany(mappedBy = "sintoma", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sintoma", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CasoSintoma> sintomas = new ArrayList<CasoSintoma>();
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MunicipioCaso> pacientes = new ArrayList<MunicipioCaso>();
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Tratamento> tratamentos = new ArrayList<Tratamento>();
 
     public CasoLVC() {

@@ -43,19 +43,19 @@ public class Paciente {
     @Column
     private String sexo;
 
-    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.REMOVE)
     @PrimaryKeyJoinColumn
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "caso", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MunicipioCaso> caso = new ArrayList<MunicipioCaso>();
 
     public Paciente(String name, Boolean hiv, String telefone, String nomeMae, Float peso, Boolean gestante,
             Long numCartaoSus, EtniaEnum etniaEnum, String escolaridade, String sexo) {
 
-                if(name.isBlank() || name.isEmpty()) {
-                    throw new IllegalArgumentException("Nome não pode ser vazio ou nulo");
-                }
+        if (name.isBlank() || name.isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser vazio ou nulo");
+        }
 
         this.name = name;
         this.hiv = hiv;
@@ -68,7 +68,6 @@ public class Paciente {
         this.escolaridade = escolaridade;
         this.sexo = sexo;
     }
-
 
     public Paciente() {
     }

@@ -21,7 +21,7 @@ public class Sintoma {
 
     private String name;
 
-    @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "caso", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CasoSintoma> casos = new ArrayList<CasoSintoma>();
 
     public Sintoma(Long id, String string) {
@@ -31,6 +31,7 @@ public class Sintoma {
 
     public Sintoma() {
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -55,7 +56,5 @@ public class Sintoma {
     public String toString() {
         return "{" + "id:" + id + ", name:" + name + "}";
     }
-
-    
 
 }

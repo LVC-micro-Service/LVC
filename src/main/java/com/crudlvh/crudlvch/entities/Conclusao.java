@@ -27,7 +27,7 @@ public class Conclusao {
     private String criterioConfirmacao;
     private EvolucaoEnum evolucaoCaso;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private CasoLVC caso;
 
     public Conclusao(boolean diagnosticoImunologico, boolean diagnosticoParasitologico,

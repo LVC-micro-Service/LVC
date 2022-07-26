@@ -3,6 +3,7 @@ package com.crudlvh.crudlvch.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,9 @@ import com.crudlvh.crudlvch.service.CasoSintomaServico;
 import com.crudlvh.crudlvch.service.MunicipioCasoServico;
 import com.crudlvh.crudlvch.service.PacienteServico;
 import com.crudlvh.crudlvch.service.TratamentoServico;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.JSONObject;
 
 @RestController
 @RequestMapping(value = "/caso")
@@ -63,8 +65,13 @@ public class ListarCasosLVC {
 
                 Paciente paciente = pacienteServico.findPacienteById(municipioCaso.getPaciente().getId());
 
-                CasoCompleto casoCompleto = new CasoCompleto(casoLVC, sintomas, paciente, paciente.getEndereco(),
-                        paciente.getEndereco().getGeoLocalizacao());
+                CasoCompleto casoCompleto = new CasoCompleto(
+                    casoLVC, 
+                    sintomas, 
+                    paciente, 
+                    paciente.getEndereco(),
+                    paciente.getEndereco().getGeoLocalizacao()
+                    );
 
                 Tratamento tratamento = tratamentoServico.findByCasoId(casoLVC.getId());
 
@@ -79,6 +86,22 @@ public class ListarCasosLVC {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<String>(json.toString(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "listar-2")
+    public ResponseEntity<String> listarCasos2() throws JsonProcessingException {
+
+        List<CasoLVC> casos = casoServico.listarCasos();
+        List<String> jsonResponse = new ArrayList<>();
+
+        for (CasoLVC caso : casos) {
+            String json = new ObjectMapper().writeValueAsString(caso);
+            jsonResponse.add(json);
+            
+        }
+
+        return new ResponseEntity<String>(jsonResponse.toString(), HttpStatus.OK);
+
     }
 
 }

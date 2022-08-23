@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// A tabela tratamento deve ter relação com o paciente ao invés do Caso
 @Entity
 @Table(name = "tratamento")
 public class Tratamento {
@@ -43,39 +42,39 @@ public class Tratamento {
         this.caso = caso;
     }
 
-    public Date retornarDataRegistro() {
+    public Date getDataRegistro() {
         return dataRegistro;
     }
 
-    public void definirDataRegistro(Date dataRegistro) {
+    public void setDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
-    public String retornarDroga() {
+    public String getDroga() {
         return droga;
     }
 
-    public void definirDroga(String droga) {
+    public void setDroga(String droga) {
         this.droga = droga;
     }
 
-    public float retornarDosagem() {
+    public float getDosagem() {
         return dosagem;
     }
 
-    public void definirDosagem(float dosagem) {
+    public void setDosagem(float dosagem) {
         this.dosagem = dosagem;
     }
 
-    public boolean eEfetivo() {
+    public boolean isEfetivo() {
         return efetivo;
     }
 
-    public void definirEfetividade(boolean efetivo) {
+    public void setEfetivo(boolean efetivo) {
         this.efetivo = efetivo;
     }
 
-    public void definirCaso(CasoLVC caso) {
+    public void setCaso(CasoLVC caso) {
         this.caso = caso;
     }
 

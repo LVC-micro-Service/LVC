@@ -12,7 +12,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// Conclusão deverá estar relacionada com paciente ao invés do caso
 @Entity
 public class Conclusao {
     @Id
@@ -46,35 +45,35 @@ public class Conclusao {
     public Conclusao() {
     }
 
-    public Long retornarId() {
+    public Long getId() {
         return id;
     }
 
-    public boolean eDiagnosticoImunologico() {
+    public boolean isDiagnosticoImunologico() {
         return diagnosticoImunologico;
     }
 
-    public boolean eDiagnosticoParasitologico() {
+    public boolean isDiagnosticoParasitologico() {
         return diagnosticoParasitologico;
     }
 
-    public boolean eDoencaRelacionadaAoTrabalho() {
+    public boolean isDoencaRelacionadaAoTrabalho() {
         return doencaRelacionadaAoTrabalho;
     }
 
-    public Date retornarDataEncerramento() {
+    public Date getDataEncerramento() {
         return dataEncerramento;
     }
 
-    public String retornarCriterioConfirmacao() {
+    public String getCriterioConfirmacao() {
         return criterioConfirmacao;
     }
 
-    public EvolucaoEnum retornarEvolucaoCaso() {
+    public EvolucaoEnum getEvolucaoCaso() {
         return evolucaoCaso;
     }
 
-    public CasoLVC retornarCaso() {
+    public CasoLVC getCaso() {
         return caso;
     }
 

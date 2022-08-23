@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +21,10 @@ import com.crudlvh.crudlvch.repositories.PacienteRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 // Classe para métodos readOnly com a biblioteca Transactional
 // Obs. Foi necessário criar a classe, pois a outra classe de serviço possui uma biblioteca diferente com a mesma anotação
 @Service
-public class CasoLVCServicoCopy{
+public class CasoLVCServicoCopy {
 
     @Autowired
     private CasoLVCRepository repository;
@@ -38,39 +36,36 @@ public class CasoLVCServicoCopy{
     private MunicipioCasoRepository municipioRepository;
 
     private PacienteRepository pacienteRepository;
-    
+
     @Transactional(readOnly = true)
-    public List<String> listarCasos() throws JsonProcessingException{
+    public List<String> listarCasos() throws JsonProcessingException {
         List<CasoLVC> casos = repository.findAll();
         List<String> jsonResponse = new ArrayList<String>();
 
+        for (CasoLVC caso : casos) {
+            List<CasoSintoma> casosSintomas = casoSintomaRepository.findByCasoId(caso.getId());
+            ArrayList<Sintoma> sintomas = new ArrayList<>();
 
-            for (CasoLVC caso : casos) {
-                List<CasoSintoma> casosSintomas = casoSintomaRepository.findByCasoId(caso.retornarId());
-                ArrayList<Sintoma> sintomas = new ArrayList<>();
-
-                for (CasoSintoma casoSintoma : casosSintomas) {
-                    sintomas.add(casoSintoma.retornarSintoma());
-                }
-
-                MunicipioCaso municipioCaso = municipioRepository.findByCasoId(caso.retornarId());
-
-                Paciente paciente = pacienteRepository.getById(municipioCaso.retornarPaciente().retornarId());
-
-                
-                CasoCompleto casoCompleto = new CasoCompleto(
-                    caso, 
-                    sintomas, 
-                    paciente, 
-                    paciente.retornarEndereco(),
-                    paciente.retornarEndereco().retornarGeoLocalizacao()
-                    );
-
-                String json = new ObjectMapper().writeValueAsString(casoCompleto);
-                jsonResponse.add(json);
-                
+            for (CasoSintoma casoSintoma : casosSintomas) {
+                sintomas.add(casoSintoma.getSintoma());
             }
-            return jsonResponse;
+
+            MunicipioCaso municipioCaso = municipioRepository.findByCasoId(caso.getId());
+
+            Paciente paciente = pacienteRepository.getById(municipioCaso.getPaciente().getId());
+
+            CasoCompleto casoCompleto = new CasoCompleto(
+                    caso,
+                    sintomas,
+                    paciente,
+                    paciente.getEndereco(),
+                    paciente.getEndereco().getGeoLocalizacao());
+
+            String json = new ObjectMapper().writeValueAsString(casoCompleto);
+            jsonResponse.add(json);
+
+        }
+        return jsonResponse;
     }
 
 }

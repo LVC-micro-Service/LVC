@@ -12,11 +12,11 @@ public class TratamentoServico {
     @Autowired
     private TratamentoRepository repository;
 
-    public Tratamento encontrarPorId(Long tratamentoId) {
+    public Tratamento findById(Long tratamentoId) {
         return repository.getById(tratamentoId);
     }
 
-    public Tratamento encontrarPorCasoId(Long tratamentoId) {
+    public Tratamento findByCasoId(Long tratamentoId) {
         return repository.getByCasoId(tratamentoId);
     }
 

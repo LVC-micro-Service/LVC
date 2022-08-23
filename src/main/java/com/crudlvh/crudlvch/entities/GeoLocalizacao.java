@@ -25,22 +25,22 @@ public class GeoLocalizacao {
         this.endereco = endereco;
     }
 
-    public Long retornarId() {
+    public Long getId() {
         return id;
     }
 
     public GeoLocalizacao() {
     }
 
-    public Long retornarLatitude() {
+    public Long getLatitude() {
         return latitude;
     }
 
-    public Long retornarLongitude() {
+    public Long getLongitude() {
         return longitude;
     }
 
-    public Endereco retornarEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 

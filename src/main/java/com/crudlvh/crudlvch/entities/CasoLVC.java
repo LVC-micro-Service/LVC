@@ -59,15 +59,15 @@ public class CasoLVC {
         this.tratamentos = tratamentos;
     }
 
-    public Long retornarId() {
+    public Long getId() {
         return id;
     }
 
-    public Date retornarDataRegistro() {
+    public Date getDataRegistro() {
         return dataRegistro;
     }
 
-    public void definirDataRegistro(Date dataRegistro) {
+    public void setDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
@@ -75,23 +75,21 @@ public class CasoLVC {
         this.dataRegistro = dataRegistro;
     }
 
-    public void definirCasoId(Long id) {
+    public void setCasoId(Long id) {
         this.id = id;
     }
 
-    public void definirSintomas(List<CasoSintoma> sintomas) {
-        this.sintomas = sintomas;
-    }
+    
 
-    public List<CasoSintoma> retornarSintomas() {
+    public List<CasoSintoma> getSintomas() {
         return sintomas;
     }
 
-    public List<MunicipioCaso> retornarPacientes() {
+    public List<MunicipioCaso> getPacientes() {
         return pacientes;
     }
 
-    public List<Tratamento> retornarTratamentos() {
+    public List<Tratamento> getTratamentos() {
         return tratamentos;
     }
 

@@ -16,7 +16,7 @@ public class ConclusaoServico {
         repository.save(conclusao);
     }
 
-    public Conclusao encontrarCasoLVCPorId(Long id) {
+    public Conclusao findByCasoLVCId(Long id) {
         return repository.findByCasoId(id);
     }
 

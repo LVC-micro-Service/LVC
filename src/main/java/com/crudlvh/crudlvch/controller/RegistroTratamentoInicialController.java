@@ -28,15 +28,15 @@ public class RegistroTratamentoInicialController {
     private CasoLVCServico casoService;
 
     @GetMapping(value = "/visualizar/{id}")
-    public Tratamento encontrarPorId(@PathVariable Long id) {
-        return service.encontrarPorId(id);
+    public Tratamento findById(@PathVariable Long id) {
+        return service.findById(id);
     }
 
     @PostMapping(value = "/inserir/{id}")
     public ResponseEntity<String> inserir(@PathVariable Long id, @RequestBody TratamentoDTO dto) {
         CasoLVC caso = casoService.encontrarPorId(id);
 
-        Tratamento tratamento = service.encontrarPorCasoId(caso.retornarId());
+        Tratamento tratamento = service.findByCasoId(caso.getId());
 
         if (tratamento != null) {
             return new ResponseEntity<String>("Tratamento inicial já registrado", HttpStatus.BAD_REQUEST);
@@ -44,9 +44,9 @@ public class RegistroTratamentoInicialController {
         }
 
         Tratamento t = new Tratamento(
-            dto.retornarTratamento().retornarDataRegistro(), 
-            dto.retornarTratamento().retornarDroga(),
-            dto.retornarTratamento().retornarDosagem(), 
+            dto.getTratamento().getDataRegistro(), 
+            dto.getTratamento().getDroga(),
+            dto.getTratamento().getDosagem(), 
             caso
             );
         service.inserir(t);

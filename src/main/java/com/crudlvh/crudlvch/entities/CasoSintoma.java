@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-// Para a relação N:N entre Paciente e Sintoma essa classe deverá ser PacienteSintoma retirando o atributo caso
 @Entity(name = "CasoSintoma")
 @Table(name = "caso_sintoma")
 public class CasoSintoma {
@@ -30,49 +29,49 @@ public class CasoSintoma {
     public CasoSintoma(CasoLVC caso, Sintoma sintoma) {
         this.caso = caso;
         this.sintoma = sintoma;
-        this.id = new CasoSintomaId(caso.retornarId(), sintoma.retornarId());
+        this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
     }
 
     public CasoSintoma(CasoLVC caso, Sintoma sintoma, String outro) {
         this.caso = caso;
         this.sintoma = sintoma;
         this.outro = outro;
-        this.id = new CasoSintomaId(caso.retornarId(), sintoma.retornarId());
+        this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
     }
 
     public CasoSintoma() {
 
     }
 
-    public CasoSintomaId retornarId() {
+    public CasoSintomaId getId() {
         return id;
     }
 
-    public CasoLVC retornarCaso() {
+    public CasoLVC getCaso() {
         return caso;
     }
 
-    public Sintoma retornarSintoma() {
+    public Sintoma getSintoma() {
         return sintoma;
     }
 
-    public String retornarOutro() {
+    public String getOutro() {
         return outro;
     }
 
-    public void definirId(CasoSintomaId id) {
+    public void setId(CasoSintomaId id) {
         this.id = id;
     }
 
-    public void definirCaso(CasoLVC caso) {
+    public void setCaso(CasoLVC caso) {
         this.caso = caso;
     }
 
-    public void definirSintoma(Sintoma sintoma) {
+    public void setSintoma(Sintoma sintoma) {
         this.sintoma = sintoma;
     }
 
-    public void definirOutro(String outro) {
+    public void setOutro(String outro) {
         this.outro = outro;
     }
 

@@ -14,7 +14,7 @@ public class Paciente {
     private Long id;
 
     @Column(nullable = true)
-    private String nome;
+    private String name;
 
     @Column
     private Boolean hiv;
@@ -50,14 +50,14 @@ public class Paciente {
     @OneToMany(mappedBy = "caso", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MunicipioCaso> caso = new ArrayList<MunicipioCaso>();
 
-    public Paciente(String nome, Boolean hiv, String telefone, String nomeMae, Float peso, Boolean gestante,
+    public Paciente(String name, Boolean hiv, String telefone, String nomeMae, Float peso, Boolean gestante,
             Long numCartaoSus, EtniaEnum etniaEnum, String escolaridade, String sexo) {
 
-        if (nome.isBlank() || nome.isEmpty()) {
+        if (name.isBlank() || name.isEmpty()) {
             throw new IllegalArgumentException("Nome não pode ser vazio ou nulo");
         }
 
-        this.nome = nome;
+        this.name = name;
         this.hiv = hiv;
         this.telefone = telefone;
         this.nomeMae = nomeMae;
@@ -72,109 +72,113 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Long retornarId() {
+    public Long getId() {
         return id;
     }
 
-    public String retornarNome() {
-        return nome;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void definirNome(String nome) {
-        this.nome = nome;
+    public String getName() {
+        return name;
     }
 
-    public Boolean retornarHiv() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Boolean getHiv() {
         return hiv;
     }
 
-    public void definirHiv(Boolean hiv) {
+    public void setHiv(Boolean hiv) {
         this.hiv = hiv;
     }
 
-    public String retornarTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void definirTelefone(String telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public String retornarNomeMae() {
+    public String getNomeMae() {
         return nomeMae;
     }
 
-    public void definirNomeMae(String nomeMae) {
+    public void setNomeMae(String nomeMae) {
         this.nomeMae = nomeMae;
     }
 
-    public Float retornarPeso() {
+    public Float getPeso() {
         return peso;
     }
 
-    public void definirPeso(Float peso) {
+    public void setPeso(Float peso) {
         this.peso = peso;
     }
 
-    public Boolean retornarGestante() {
+    public Boolean getGestante() {
         return gestante;
     }
 
-    public void definirGestante(Boolean gestante) {
+    public void setGestante(Boolean gestante) {
         this.gestante = gestante;
     }
 
-    public Long retornarNumCartaoSus() {
+    public Long getNumCartaoSus() {
         return numCartaoSus;
     }
 
-    public void definirNumCartaoSus(Long numCartaoSus) {
+    public void setNumCartaoSus(Long numCartaoSus) {
         this.numCartaoSus = numCartaoSus;
     }
 
-    public EtniaEnum retornarEtniaEnum() {
+    public EtniaEnum getEtniaEnum() {
         return etniaEnum;
     }
 
-    public void definirEtniaEnum(EtniaEnum etniaEnum) {
+    public void setEtniaEnum(EtniaEnum etniaEnum) {
         this.etniaEnum = etniaEnum;
     }
 
-    public String retornarEscolaridade() {
+    public String getEscolaridade() {
         return escolaridade;
     }
 
-    public void definirEscolaridade(String escolaridade) {
+    public void setEscolaridade(String escolaridade) {
         this.escolaridade = escolaridade;
     }
 
-    public String retornarSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void definirSexo(String sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
-    public Endereco retornarEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void definirEndereco(Endereco endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
-    public List<MunicipioCaso> retornarCaso() {
+    public List<MunicipioCaso> getCaso() {
         return caso;
     }
 
-    public void definirCaso(List<MunicipioCaso> caso) {
+    public void setCaso(List<MunicipioCaso> caso) {
         this.caso = caso;
     }
 
     @Override
     public String toString() {
-        return "Paciente: {id:" + id + ", nome:" + nome + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
+        return "Paciente: {id:" + id + ", name:" + name + ", hiv:" + hiv + ", telefone:" + telefone + ", nomeMae:"
                 + nomeMae + ", peso:" + peso + ", gestante:" + gestante + ", numCartaoSus:" + numCartaoSus
                 + ", etniaEnum:" + etniaEnum + ", escolaridade:" + escolaridade + ", sexo:" + sexo + "}";
     }

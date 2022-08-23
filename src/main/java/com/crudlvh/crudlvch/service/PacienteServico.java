@@ -18,10 +18,10 @@ public class PacienteServico {
     }
 
     public Paciente salvarPaciente(CasoLVCDTO dto) {
-        Paciente paciente = new Paciente(dto.retornarPaciente().retornarNome(), dto.retornarPaciente().retornarHiv(),
-            dto.retornarPaciente().retornarTelefone(), dto.retornarPaciente().retornarNomeMae(), dto.retornarPaciente().retornarPeso(),
-            dto.retornarPaciente().retornarGestante(), dto.retornarPaciente().retornarNumCartaoSus(), dto.retornarPaciente().retornarEtniaEnum(),
-            dto.retornarPaciente().retornarEscolaridade(), dto.retornarPaciente().retornarSexo());
+        Paciente paciente = new Paciente(dto.getPaciente().getName(), dto.getPaciente().getHiv(),
+            dto.getPaciente().getTelefone(), dto.getPaciente().getNomeMae(), dto.getPaciente().getPeso(),
+            dto.getPaciente().getGestante(), dto.getPaciente().getNumCartaoSus(), dto.getPaciente().getEtniaEnum(),
+            dto.getPaciente().getEscolaridade(), dto.getPaciente().getSexo());
     
         return inserir(paciente);
       }

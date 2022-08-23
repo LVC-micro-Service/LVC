@@ -2,7 +2,6 @@ package com.crudlvh.crudlvch.entities;
 
 import javax.persistence.*;
 
-// Analisar se é mais adequado o endereço estar relacionado com um caso, já que em um relatório de caso com múltiplos pacientes usualmente serão da mesma casa.
 @Entity
 public class Endereco {
 
@@ -74,103 +73,107 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Long retornarId() {
+    public Long getId() {
         return id;
     }
 
-    public Paciente retornarPaciente() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void definirPaciente(Paciente paciente) {
+    public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
-    public Long retornarCodigoIBGE() {
+    public Long getCodigoIBGE() {
         return codigoIBGE;
     }
 
-    public void definirCodigoIBGE(Long codigoIBGE) {
+    public void setCodigoIBGE(Long codigoIBGE) {
         this.codigoIBGE = codigoIBGE;
     }
 
-    public String retornarUF() {
+    public String getUF() {
         return uf;
     }
 
-    public void definirUF(String uF) {
+    public void setUF(String uF) {
         this.uf = uF;
     }
 
-    public String retornarMunicipio() {
+    public String getMunicipio() {
         return municipio;
     }
 
-    public void definirMunicipio(String municipio) {
+    public void setMunicipio(String municipio) {
         this.municipio = municipio;
     }
 
-    public Long retornarCep() {
+    public Long getCep() {
         return cep;
     }
 
-    public void definirCep(Long cep) {
+    public void setCep(Long cep) {
         this.cep = cep;
     }
 
-    public String retornarZona() {
+    public String getZona() {
         return zona;
     }
 
-    public void definirZona(String zona) {
+    public void setZona(String zona) {
         this.zona = zona;
     }
 
-    public String retornarDistrito() {
+    public String getDistrito() {
         return distrito;
     }
 
-    public void definirDistrito(String distrito) {
+    public void setDistrito(String distrito) {
         this.distrito = distrito;
     }
 
-    public String retornarBairro() {
+    public String getBairro() {
         return bairro;
     }
 
-    public void definirBairro(String bairro) {
+    public void setBairro(String bairro) {
         this.bairro = bairro;
     }
 
-    public String retornarLogradouro() {
+    public String getLogradouro() {
         return logradouro;
     }
 
-    public void definirLogradouro(String logradouro) {
+    public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
 
-    public String retornarComplemento() {
+    public String getComplemento() {
         return complemento;
     }
 
-    public void definirComplemento(String complemento) {
+    public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
 
-    public int retornarNumeroCasa() {
+    public int getNumeroCasa() {
         return numeroCasa;
     }
 
-    public void definirNumeroCasa(int numeroCasa) {
+    public void setNumeroCasa(int numeroCasa) {
         this.numeroCasa = numeroCasa;
     }
 
-    public GeoLocalizacao retornarGeoLocalizacao() {
+    public GeoLocalizacao getGeoLocalizacao() {
         return geoLocalizacao;
     }
 
-    public void definirGeoLocalizacao(GeoLocalizacao geoLocalizacao) {
+    public void setGeoLocalizacao(GeoLocalizacao geoLocalizacao) {
         this.geoLocalizacao = geoLocalizacao;
     }
 

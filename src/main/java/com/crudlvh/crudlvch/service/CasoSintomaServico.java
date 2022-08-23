@@ -32,7 +32,7 @@ public class CasoSintomaServico {
     public List<CasoSintoma> salvarSintomas(List<Sintoma> sintomas, CasoLVC caso) {
         List<CasoSintoma> casosSintomas = new ArrayList<>();
         for (Sintoma item : sintomas) {
-          Sintoma sintoma = sintomaRepository.getById(item.retornarId());
+          Sintoma sintoma = sintomaRepository.getById(item.getId());
           CasoSintoma casoSintoma = new CasoSintoma(caso, sintoma);
     
           casosSintomas.add(inserir(casoSintoma));

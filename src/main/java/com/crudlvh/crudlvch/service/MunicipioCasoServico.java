@@ -24,7 +24,7 @@ public class MunicipioCasoServico {
     }
 
     public MunicipioCaso salvarMunicipioCaso(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {
-        MunicipioCaso municipioCaso = new MunicipioCaso(caso, paciente, dto.retornarCodigoIbge());
+        MunicipioCaso municipioCaso = new MunicipioCaso(caso, paciente, dto.getCodigoIbge());
     
         return inserir(municipioCaso);
       }

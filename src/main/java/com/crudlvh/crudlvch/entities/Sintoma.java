@@ -19,38 +19,42 @@ public class Sintoma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String name;
 
     @OneToMany(mappedBy = "caso", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CasoSintoma> casos = new ArrayList<CasoSintoma>();
 
     public Sintoma(Long id, String string) {
         this.id = id;
-        this.nome = string;
+        this.name = string;
     }
 
     public Sintoma() {
     }
 
-    public void definirName(String nome) {
-        this.nome = nome;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void definirCasos(List<CasoSintoma> casos) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCasos(List<CasoSintoma> casos) {
         this.casos = casos;
     }
 
-    public Long retornarId() {
+    public Long getId() {
         return id;
     }
 
-    public String retornarNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "{" + "id:" + id + ", nome:" + nome + "}";
+        return "{" + "id:" + id + ", name:" + name + "}";
     }
 
 }

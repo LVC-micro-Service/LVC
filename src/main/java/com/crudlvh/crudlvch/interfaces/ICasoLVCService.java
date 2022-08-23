@@ -5,5 +5,5 @@ import com.crudlvh.crudlvch.entities.CasoLVC;
 
 public interface ICasoLVCService{
 
-    CasoLVC registrarCaso(CasoLVCDTO dto);
+    CasoLVC criarCaso(CasoLVCDTO dto);
 }

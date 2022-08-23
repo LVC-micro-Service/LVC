@@ -29,49 +29,49 @@ public class CasoSintoma {
     public CasoSintoma(CasoLVC caso, Sintoma sintoma) {
         this.caso = caso;
         this.sintoma = sintoma;
-        this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
+        this.id = new CasoSintomaId(caso.retornarId(), sintoma.retornarId());
     }
 
     public CasoSintoma(CasoLVC caso, Sintoma sintoma, String outro) {
         this.caso = caso;
         this.sintoma = sintoma;
         this.outro = outro;
-        this.id = new CasoSintomaId(caso.getId(), sintoma.getId());
+        this.id = new CasoSintomaId(caso.retornarId(), sintoma.retornarId());
     }
 
     public CasoSintoma() {
 
     }
 
-    public CasoSintomaId getId() {
+    public CasoSintomaId retornarId() {
         return id;
     }
 
-    public CasoLVC getCaso() {
+    public CasoLVC retornarCaso() {
         return caso;
     }
 
-    public Sintoma getSintoma() {
+    public Sintoma retornarSintoma() {
         return sintoma;
     }
 
-    public String getOutro() {
+    public String retornarOutro() {
         return outro;
     }
 
-    public void setId(CasoSintomaId id) {
+    public void definirId(CasoSintomaId id) {
         this.id = id;
     }
 
-    public void setCaso(CasoLVC caso) {
+    public void definirCaso(CasoLVC caso) {
         this.caso = caso;
     }
 
-    public void setSintoma(Sintoma sintoma) {
+    public void definirSintoma(Sintoma sintoma) {
         this.sintoma = sintoma;
     }
 
-    public void setOutro(String outro) {
+    public void definirOutro(String outro) {
         this.outro = outro;
     }
 

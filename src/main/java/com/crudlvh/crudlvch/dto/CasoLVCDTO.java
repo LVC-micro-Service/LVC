@@ -24,43 +24,43 @@ public class CasoLVCDTO {
     
     private Paciente paciente;
 
-    public Date getDataRegistro() {
+    public Date retornarDataRegistro() {
         return dataRegistro;
     }
     
-    public List<Sintoma> getSintomas() {
+    public List<Sintoma> retornarSintomas() {
         return sintomas;
     }
 
-    public Paciente getPaciente() {
+    public Paciente retornarPaciente() {
         return paciente;
     }
 
-    public String getCodigoIbge() {
+    public String retornarCodigoIbge() {
         return codigoIbge;
     }
 
-    public Long getId() {
+    public Long retornarId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void definirId(Long id) {
         this.id = id;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
+    public void definirDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
-    public void setCodigoIbge(String codigoIbge) {
+    public void definirCodigoIbge(String codigoIbge) {
         this.codigoIbge = codigoIbge;
     }
 
-    public void setSintomas(List<Sintoma> sintomas) {
+    public void definirSintomas(List<Sintoma> sintomas) {
         this.sintomas = sintomas;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void definirPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 

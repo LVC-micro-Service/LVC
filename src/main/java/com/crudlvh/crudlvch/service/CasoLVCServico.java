@@ -49,67 +49,76 @@ public class CasoLVCServico implements ICasoLVCService {
     private GeoLocalizacaoServico geoLocalizacaoServico;
 
     public void inserirCasoSintoma(CasoSintoma casoSintoma) {
-
         casoSintomaRepository.save(casoSintoma);
     }
 
-    public CasoLVC encontrarPorId(Long id) {
-        return repository.getById(id);
-    }
-
-    public void sendStatistic(ProducerDTO casoLVCDTO) {
-        casoProducer.casoProducerMensagem(casoLVCDTO);
-    }
-
     private CasoLVC inserir(CasoLVCDTO dto) {
-        CasoLVC casoLVC = new CasoLVC(dto.getDataRegistro());
+        CasoLVC casoLVC = new CasoLVC(dto.retornarDataRegistro());
         return repository.save(casoLVC);
     }
+    
 
+    // Classe responsável por registrar o caso
+    // Obs. A estrutura do banco permite que um caso possua mais de um paciente, porém neste método é possível registrar apenas um paciente. Seria interessante para o usuário que pudesse fazer o registro de múltiplos pacientes por caso.
     @Override
     @Transactional(rollbackOn = ConstraintViolationException.class)
-    public CasoLVC criarCaso(CasoLVCDTO dto) {
+    public CasoLVC registrarCaso(CasoLVCDTO dto) {
         boolean codigo = false;
+
         try {
-            codigo = dto.getCodigoIbge() == null || dto.getCodigoIbge().equals("");
+            codigo = dto.retornarCodigoIbge() == null || dto.retornarCodigoIbge().equals("");
         } catch (NullPointerException e) {
             throw new NullPointerException("Código Ibge não informado");
         }
-        boolean p = true;
-        try {
-            p = dto.getPaciente().equals(null);
 
+        boolean p = true;
+
+        try {
+            p = dto.retornarPaciente().equals(null);
+            
         } catch (NullPointerException e) {
             throw new NullPointerException("Paciente não informado");
         }
-
+        
         if (codigo == false && !p == true) {
             CasoLVC casoLVC = inserir(dto);
-            List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
+            List<Sintoma> sintomas = dto.retornarSintomas().stream().collect(Collectors.toList());
             casoSintomaServico.salvarSintomas(sintomas, casoLVC);
             Paciente paciente = pacienteServico.salvarPaciente(dto);
             municipioCasoServico.salvarMunicipioCaso(casoLVC, paciente, dto);
             Endereco endereco = enderecoServico.salvarEndereco(paciente, dto);
             geoLocalizacaoServico.salvaGeoLocalizacao(endereco, dto);
-
+            
+            // Dto
             ProducerDTO producer = createProducerDTO(casoLVC, paciente, dto);
-
+            
             sendStatistic(producer);
             return repository.save(casoLVC);
         } else {
             throw new NullPointerException("Código IBGE não informado");
         }
     }
-
+    
     public List<CasoLVC> listarCasos() {
         return repository.findAll();
+    }
+    
+    public CasoLVC encontrarPorId(Long id) {
+        return repository.getById(id);
     }
 
     private ProducerDTO createProducerDTO(CasoLVC caso, Paciente paciente, CasoLVCDTO dto) {
         ProducerDTO producer = new ProducerDTO();
-        producer.setCaso(caso);
-        producer.setPaciente(paciente);
-        producer.setCodigoIbge(dto.getCodigoIbge());
+        producer.definirCaso(caso);
+        producer.definirPaciente(paciente);
+        producer.definirCodigoIbge(dto.retornarCodigoIbge());
         return producer;
     }
+    
+    // Método responsável por invocar a producer enviar o caso para outro microsserviço.
+    // Invocada durante o registro de um caso
+    public void sendStatistic(ProducerDTO casoLVCDTO) {
+        casoProducer.casoProducerMensagem(casoLVCDTO);
+    }
+    
 }

@@ -42,39 +42,39 @@ public class Tratamento {
         this.caso = caso;
     }
 
-    public Date getDataRegistro() {
+    public Date retornarDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
+    public void definirDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
-    public String getDroga() {
+    public String retornarDroga() {
         return droga;
     }
 
-    public void setDroga(String droga) {
+    public void definirDroga(String droga) {
         this.droga = droga;
     }
 
-    public float getDosagem() {
+    public float retornarDosagem() {
         return dosagem;
     }
 
-    public void setDosagem(float dosagem) {
+    public void definirDosagem(float dosagem) {
         this.dosagem = dosagem;
     }
 
-    public boolean isEfetivo() {
+    public boolean eEfetivo() {
         return efetivo;
     }
 
-    public void setEfetivo(boolean efetivo) {
+    public void definirEfetividade(boolean efetivo) {
         this.efetivo = efetivo;
     }
 
-    public void setCaso(CasoLVC caso) {
+    public void definirCaso(CasoLVC caso) {
         this.caso = caso;
     }
 

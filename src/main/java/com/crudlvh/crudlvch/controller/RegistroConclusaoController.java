@@ -24,7 +24,7 @@ import com.crudlvh.crudlvch.service.ConclusaoServico;
 public class RegistroConclusaoController {
 
     @Autowired
-    private ConclusaoServico service;
+    private ConclusaoServico servico;
 
     @Autowired
     private CasoLVCServico casoServico;
@@ -37,25 +37,25 @@ public class RegistroConclusaoController {
             CasoLVC caso = casoServico.encontrarPorId(id);
             if (!caso.equals(null)) {
 
-                Conclusao conclusao = service.findByCasoLVCId(id);
+                Conclusao conclusaoCadastrada = servico.encontrarCasoLVCPorId(id);
 
-                System.out.println(caso.getId());
+                System.out.println(caso.retornarId());
 
 
-                if (conclusao != null) {
+                if (conclusaoCadastrada != null) {
                     throw new Exception("Conclusão já cadastrada");
                 }
 
-                EvolucaoEnum evolucao = dto.getConclusao().getEvolucaoCaso();
+                EvolucaoEnum evolucao = dto.retornarConclusao().retornarEvolucaoCaso();
 
-                Conclusao conclusion = new Conclusao(dto.getConclusao().isDiagnosticoImunologico(),
-                        dto.getConclusao().isDiagnosticoParasitologico(),
-                        dto.getConclusao().isDoencaRelacionadaAoTrabalho(), dto.getConclusao().getDataEncerramento(),
-                        dto.getConclusao().getCriterioConfirmacao(), evolucao, caso);
+                Conclusao conclusao = new Conclusao(dto.retornarConclusao().eDiagnosticoImunologico(),
+                        dto.retornarConclusao().eDiagnosticoParasitologico(),
+                        dto.retornarConclusao().eDoencaRelacionadaAoTrabalho(), dto.retornarConclusao().retornarDataEncerramento(),
+                        dto.retornarConclusao().retornarCriterioConfirmacao(), evolucao, caso);
 
 
-                service.inserir(conclusion);
-                return new ResponseEntity<String>(conclusion.toString(), HttpStatus.OK);
+                servico.inserir(conclusao);
+                return new ResponseEntity<String>(conclusao.toString(), HttpStatus.OK);
 
             } else {
                 throw new Exception();

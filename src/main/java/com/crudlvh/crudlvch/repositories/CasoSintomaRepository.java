@@ -12,7 +12,5 @@ import com.crudlvh.crudlvch.entities.CasoSintomaId;
 public interface CasoSintomaRepository extends JpaRepository<CasoSintoma, CasoSintomaId> {
 
     public List<CasoSintoma> findByCasoId(Long id);
-
-
-
+    
 }

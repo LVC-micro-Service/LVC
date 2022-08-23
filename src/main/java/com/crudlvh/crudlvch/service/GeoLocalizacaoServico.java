@@ -20,8 +20,8 @@ public class GeoLocalizacaoServico {
 
     public void salvaGeoLocalizacao(Endereco endereco, CasoLVCDTO dto) {
         GeoLocalizacao geoLocalizacao = new GeoLocalizacao(
-            dto.getPaciente().getEndereco().getGeoLocalizacao().getLatitude(),
-            dto.getPaciente().getEndereco().getGeoLocalizacao().getLongitude(), endereco);
+            dto.retornarPaciente().retornarEndereco().retornarGeoLocalizacao().retornarLatitude(),
+            dto.retornarPaciente().retornarEndereco().retornarGeoLocalizacao().retornarLongitude(), endereco);
         inserir(geoLocalizacao);
       }
 }

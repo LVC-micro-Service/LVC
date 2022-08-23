@@ -18,27 +18,27 @@ public class CasoCompleto {
 
     private GeoLocalizacao geoLocalizacao;
 
-    public GeoLocalizacao getGeoLocalizacao() {
+    public GeoLocalizacao retornarGeoLocalizacao() {
         return geoLocalizacao;
     }
 
-    public void setGeoLocalizacao(GeoLocalizacao geoLocalizacao) {
+    public void definirGeoLocalizacao(GeoLocalizacao geoLocalizacao) {
         this.geoLocalizacao = geoLocalizacao;
     }
 
-    public Tratamento getTratamento() {
+    public Tratamento retornarTratamento() {
         return tratamento;
     }
 
-    public void setTratamento(Tratamento tratamento) {
+    public void definirTratamento(Tratamento tratamento) {
         this.tratamento = tratamento;
     }
 
-    public Conclusao getConclusao() {
+    public Conclusao retornarConclusao() {
         return conclusao;
     }
 
-    public void setConclusao(Conclusao conclusao) {
+    public void definirConclusao(Conclusao conclusao) {
         this.conclusao = conclusao;
     }
 
@@ -46,35 +46,35 @@ public class CasoCompleto {
 
     private Conclusao conclusao;
 
-    public CasoLVC getCaso() {
+    public CasoLVC retornarCaso() {
         return caso;
     }
 
-    public void setCaso(CasoLVC caso) {
+    public void definirCaso(CasoLVC caso) {
         this.caso = caso;
     }
 
-    public List<Sintoma> getSintomas() {
+    public List<Sintoma> retornarSintomas() {
         return sintomas;
     }
 
-    public void setSintomas(List<Sintoma> sintomas) {
+    public void definirSintomas(List<Sintoma> sintomas) {
         this.sintomas = sintomas;
     }
 
-    public Paciente getPaciente() {
+    public Paciente retornarPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void definirPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
-    public Endereco getEndereco() {
+    public Endereco retornarEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void definirEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
@@ -82,7 +82,7 @@ public class CasoCompleto {
 
     @Override
     public String toString() {
-        return "{CasoCompleto: { id:" + caso.getId() + "," + "\n" + endereco.toString() + ",\n"
+        return "{CasoCompleto: { id:" + caso.retornarId() + "," + "\n" + endereco.toString() + ",\n"
                 + paciente.toString() + ",\n"
                 + geoLocalizacao.toString() + ",\nSintomas:" + sintomas.toString() + ", Tratamento:" + tratamentoList()
                 + ", Conclusao:" + conclusaoString() + "}}";

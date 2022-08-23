@@ -7,7 +7,7 @@ public class TratamentoDTO {
 
     private Tratamento tratamento;
 
-    public Tratamento getTratamento() {
+    public Tratamento retornarTratamento() {
         return tratamento;
     }
 

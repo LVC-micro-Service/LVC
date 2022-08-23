@@ -19,12 +19,12 @@ public class EnderecoServico {
     }
 
     public Endereco salvarEndereco(Paciente paciente, CasoLVCDTO dto) {
-        Endereco endereco = new Endereco(paciente, dto.getPaciente().getEndereco().getCodigoIBGE(),
-            dto.getPaciente().getEndereco().getUF(), dto.getPaciente().getEndereco().getMunicipio(),
-            dto.getPaciente().getEndereco().getCep(), dto.getPaciente().getEndereco().getZona(),
-            dto.getPaciente().getEndereco().getDistrito(), dto.getPaciente().getEndereco().getBairro(),
-            dto.getPaciente().getEndereco().getLogradouro(), dto.getPaciente().getEndereco().getComplemento(),
-            dto.getPaciente().getEndereco().getNumeroCasa());
+        Endereco endereco = new Endereco(paciente, dto.retornarPaciente().retornarEndereco().retornarCodigoIBGE(),
+            dto.retornarPaciente().retornarEndereco().retornarUF(), dto.retornarPaciente().retornarEndereco().retornarMunicipio(),
+            dto.retornarPaciente().retornarEndereco().retornarCep(), dto.retornarPaciente().retornarEndereco().retornarZona(),
+            dto.retornarPaciente().retornarEndereco().retornarDistrito(), dto.retornarPaciente().retornarEndereco().retornarBairro(),
+            dto.retornarPaciente().retornarEndereco().retornarLogradouro(), dto.retornarPaciente().retornarEndereco().retornarComplemento(),
+            dto.retornarPaciente().retornarEndereco().retornarNumeroCasa());
     
         return inserir(endereco);
       }

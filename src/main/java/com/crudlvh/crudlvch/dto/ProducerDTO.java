@@ -8,29 +8,29 @@ public class ProducerDTO {
     private CasoLVC caso;
     private Paciente paciente;
 
-    public String getCodigoIbge(){
+    public String retornarCodigoIbge(){
         return codigoIbge;
     }
 
-    public void setCodigoIbge(String codigoIbge){
+    public void definirCodigoIbge(String codigoIbge){
         this.codigoIbge = codigoIbge;
      }
 
 
-    public CasoLVC getCaso() {
+    public CasoLVC retornarCaso() {
         return caso;
     }
 
 
-    public void setCaso(CasoLVC caso) {
+    public void definirCaso(CasoLVC caso) {
         this.caso = caso;
     }
 
-    public Paciente getPaciente() {
+    public Paciente retornarPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void definirPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 

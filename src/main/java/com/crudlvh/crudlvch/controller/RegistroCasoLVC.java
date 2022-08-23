@@ -1,7 +1,6 @@
 package com.crudlvh.crudlvch.controller;
 
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,24 +21,21 @@ public class RegistroCasoLVC {
   private CasoLVCServico servico;
 
 
+  // Recebe a DTO para inserir um caso e a lógica das regras de negócio são tratadas na classe de serviço
   @PostMapping("/inserir")
-  public ResponseEntity<String> salvarCasoLVC(@RequestBody CasoLVCDTO dto) {
-
-    return capturarCaso(dto);
-  }
-
-
-  @Transactional(rollbackOn = {Exception.class, NullPointerException.class})
-  public ResponseEntity<String> capturarCaso(CasoLVCDTO dto) {
+  public ResponseEntity<String> inserir(@RequestBody CasoLVCDTO dto) {
     try {
-        servico.criarCaso(dto);
+        servico.registrarCaso(dto);
         return new ResponseEntity<>("Caso registrado com sucesso", HttpStatus.OK);
     } catch (NullPointerException e) {
-      return new ResponseEntity<String>("" + e.getMessage(), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
     } catch (Exception e) {
       return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
   }
+
+
 
   
 

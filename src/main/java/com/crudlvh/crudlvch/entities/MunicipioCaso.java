@@ -23,19 +23,19 @@ public class MunicipioCaso {
     @MapsId("pacienteId")
     private Paciente paciente;
 
-    public CasoLVC getCaso() {
+    public CasoLVC retornarCaso() {
         return caso;
     }
 
-    public void setCaso(CasoLVC caso) {
+    public void definirCaso(CasoLVC caso) {
         this.caso = caso;
     }
 
-    public Paciente getPaciente() {
+    public Paciente retornarPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void definirPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
@@ -46,7 +46,7 @@ public class MunicipioCaso {
         this.caso = caso;
         this.paciente = paciente;
         this.codigoIbge = codigoIbge;
-        this.id = new MunicipioCasoId(caso.getId(), paciente.getId());
+        this.id = new MunicipioCasoId(caso.retornarId(), paciente.retornarId());
     }
 
     public MunicipioCaso() {

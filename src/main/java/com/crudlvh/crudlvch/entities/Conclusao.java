@@ -45,35 +45,35 @@ public class Conclusao {
     public Conclusao() {
     }
 
-    public Long getId() {
+    public Long retornarId() {
         return id;
     }
 
-    public boolean isDiagnosticoImunologico() {
+    public boolean eDiagnosticoImunologico() {
         return diagnosticoImunologico;
     }
 
-    public boolean isDiagnosticoParasitologico() {
+    public boolean eDiagnosticoParasitologico() {
         return diagnosticoParasitologico;
     }
 
-    public boolean isDoencaRelacionadaAoTrabalho() {
+    public boolean eDoencaRelacionadaAoTrabalho() {
         return doencaRelacionadaAoTrabalho;
     }
 
-    public Date getDataEncerramento() {
+    public Date retornarDataEncerramento() {
         return dataEncerramento;
     }
 
-    public String getCriterioConfirmacao() {
+    public String retornarCriterioConfirmacao() {
         return criterioConfirmacao;
     }
 
-    public EvolucaoEnum getEvolucaoCaso() {
+    public EvolucaoEnum retornarEvolucaoCaso() {
         return evolucaoCaso;
     }
 
-    public CasoLVC getCaso() {
+    public CasoLVC retornarCaso() {
         return caso;
     }
 

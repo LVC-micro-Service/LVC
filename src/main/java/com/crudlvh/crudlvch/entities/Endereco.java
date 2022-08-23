@@ -73,107 +73,103 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Long getId() {
+    public Long retornarId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Paciente getPaciente() {
+    public Paciente retornarPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void definirPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
-    public Long getCodigoIBGE() {
+    public Long retornarCodigoIBGE() {
         return codigoIBGE;
     }
 
-    public void setCodigoIBGE(Long codigoIBGE) {
+    public void definirCodigoIBGE(Long codigoIBGE) {
         this.codigoIBGE = codigoIBGE;
     }
 
-    public String getUF() {
+    public String retornarUF() {
         return uf;
     }
 
-    public void setUF(String uF) {
+    public void definirUF(String uF) {
         this.uf = uF;
     }
 
-    public String getMunicipio() {
+    public String retornarMunicipio() {
         return municipio;
     }
 
-    public void setMunicipio(String municipio) {
+    public void definirMunicipio(String municipio) {
         this.municipio = municipio;
     }
 
-    public Long getCep() {
+    public Long retornarCep() {
         return cep;
     }
 
-    public void setCep(Long cep) {
+    public void definirCep(Long cep) {
         this.cep = cep;
     }
 
-    public String getZona() {
+    public String retornarZona() {
         return zona;
     }
 
-    public void setZona(String zona) {
+    public void definirZona(String zona) {
         this.zona = zona;
     }
 
-    public String getDistrito() {
+    public String retornarDistrito() {
         return distrito;
     }
 
-    public void setDistrito(String distrito) {
+    public void definirDistrito(String distrito) {
         this.distrito = distrito;
     }
 
-    public String getBairro() {
+    public String retornarBairro() {
         return bairro;
     }
 
-    public void setBairro(String bairro) {
+    public void definirBairro(String bairro) {
         this.bairro = bairro;
     }
 
-    public String getLogradouro() {
+    public String retornarLogradouro() {
         return logradouro;
     }
 
-    public void setLogradouro(String logradouro) {
+    public void definirLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
 
-    public String getComplemento() {
+    public String retornarComplemento() {
         return complemento;
     }
 
-    public void setComplemento(String complemento) {
+    public void definirComplemento(String complemento) {
         this.complemento = complemento;
     }
 
-    public int getNumeroCasa() {
+    public int retornarNumeroCasa() {
         return numeroCasa;
     }
 
-    public void setNumeroCasa(int numeroCasa) {
+    public void definirNumeroCasa(int numeroCasa) {
         this.numeroCasa = numeroCasa;
     }
 
-    public GeoLocalizacao getGeoLocalizacao() {
+    public GeoLocalizacao retornarGeoLocalizacao() {
         return geoLocalizacao;
     }
 
-    public void setGeoLocalizacao(GeoLocalizacao geoLocalizacao) {
+    public void definirGeoLocalizacao(GeoLocalizacao geoLocalizacao) {
         this.geoLocalizacao = geoLocalizacao;
     }
 

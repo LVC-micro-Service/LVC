@@ -6,7 +6,7 @@ public class ConclusaoDTO {
 
     private Conclusao conclusao;
 
-    public Conclusao getConclusao() {
+    public Conclusao retornarConclusao() {
         return conclusao;
     }
 

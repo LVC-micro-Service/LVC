@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+// Conclusão deverá estar relacionada com paciente ao invés do caso
 @Entity
 public class Conclusao {
     @Id

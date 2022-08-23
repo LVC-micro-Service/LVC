@@ -59,7 +59,7 @@ public class CasoLVCServico implements ICasoLVCService {
     
 
     // Classe responsável por registrar o caso
-    // Obs. A estrutura do banco permite que um caso possua mais de um paciente, porém neste método é possível registrar apenas um paciente. Seria interessante para o usuário que pudesse fazer o registro de múltiplos pacientes por caso.
+    // Obs. O ideal é que o usuário possa preencher mais de um paciente por caso, necessitando fazer alterações nas classes Caso, Conclusão, Sintoma e Tratamento.
     @Override
     @Transactional(rollbackOn = ConstraintViolationException.class)
     public CasoLVC registrarCaso(CasoLVCDTO dto) {

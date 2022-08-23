@@ -2,6 +2,7 @@ package com.crudlvh.crudlvch.entities;
 
 import javax.persistence.*;
 
+// Analisar se é mais adequado o endereço estar relacionado com um caso, já que em um relatório de caso com múltiplos pacientes usualmente serão da mesma casa.
 @Entity
 public class Endereco {
 

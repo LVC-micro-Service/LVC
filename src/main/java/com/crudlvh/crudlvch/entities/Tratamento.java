@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+// A tabela tratamento deve ter relação com o paciente ao invés do Caso
 @Entity
 @Table(name = "tratamento")
 public class Tratamento {

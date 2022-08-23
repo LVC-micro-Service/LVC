@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+// Para a relação N:N entre Paciente e Sintoma essa classe deverá ser PacienteSintoma retirando o atributo caso
 @Entity(name = "CasoSintoma")
 @Table(name = "caso_sintoma")
 public class CasoSintoma {
